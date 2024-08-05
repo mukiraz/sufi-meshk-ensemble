@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from dotenv import load_dotenv, dotenv_values
 import os
 from pathlib import Path
-from sufi_meshk.core.storages import StaticStorage, MediaStorage
+from core.storages import StaticStorage, MediaStorage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
