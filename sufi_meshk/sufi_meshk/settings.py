@@ -136,21 +136,21 @@ STATICFILES_STORAGE = 'core.storages.StaticStorage'
 # Media files (user-uploaded content)
 DEFAULT_FILE_STORAGE = 'core.storages.MediaStorage'
 
-# S3 Bucket Configuration
+# AWS S3 Configuration
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')  # Default region
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+# To prevent URL generation with query string auth
+AWS_QUERYSTRING_AUTH = False
 
-
-# Static URL
+# Static and media URLs
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
-# Media URL
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 STATICFILES_DIRS = [
