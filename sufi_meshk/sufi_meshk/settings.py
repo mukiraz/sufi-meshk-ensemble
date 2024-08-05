@@ -32,7 +32,7 @@ DEBUG = os.getenv("DEBUG")
 
 #ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST")]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
 # Application definition
 
