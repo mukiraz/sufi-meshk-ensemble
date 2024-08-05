@@ -1,0 +1,19 @@
+{% load i18n %}
+<section class="mt-5 our-journey">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center">{% translate "Our Journey" %}</h2>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5 align-items-center">            
+            <div class="col-md-6">
+                <p>{% blocktrans %}We are passionate devotees of Sufi music, an exquisite art form with roots that trace back to 1300 A.D. Our journey began with a shared love for this timeless musical tradition, which embodies the spiritual and cultural heritage of the Mevlevi Order. Through our performances, we aim to honor and preserve the profound beauty and depth of Sufi music, bringing its transcendent melodies to contemporary audiences.{% endblocktrans %}</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/about_us/our_journey.jpeg' %}" alt="" class="img-fluid">
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>

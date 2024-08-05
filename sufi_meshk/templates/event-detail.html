@@ -1,0 +1,215 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+{% block meta %}
+
+<meta name="description" content="{{ event.description|striptags|truncatewords:20 }}">
+<meta name="keywords" content="{{ event.tags }}">
+<meta name="author" content="{{ event.organizer }}">
+<meta property="og:title" content="{{ event.event_name }}">
+<meta property="og:description" content="{{ event.description|striptags|truncatewords:20 }}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ event.featured_image.url }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ event.event_name }}">
+<meta name="twitter:description" content="{{ event.description|striptags|truncatewords:20 }}">
+<meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ event.featured_image.url }}">
+
+<style>
+.cursor-pointer {
+    cursor: pointer;
+}
+</style>
+
+{% endblock %}
+{% block main %}
+<div class="container mt-5">
+    <div class="row my-4">
+        <div class="col">
+            <h2 class="text-center">{% translate "Event Details" %} - {{ event.event_name }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-lg-8">
+            <div class="card mb-3">
+                <img src="{{ event.featured_image.url }}" class="card-img-top img-fluid" alt="{{ event.event_name }}">
+                <div class="card-body">
+                    <h2 class="card-title">{{ event.event_name }}</h2>
+                    <p class="card-text">{{ event.description }}</p>
+                    <p class="card-text">
+                        <strong>{% translate "Date" %}:</strong> {{ event.date }} {% if event.time %}{{ event.time }}{% endif %}
+                    </p>
+                    {% if event.end_date %}
+                    <p class="card-text">
+                        <strong>{% translate "End Date" %}:</strong> {{ event.end_date }} {% if event.end_time %}{{ event.end_time }}{% endif %}
+                    </p>
+                    {% endif %}
+                    <p class="card-text">
+                        <strong>{% translate "Place" %}:</strong> {{ event.place }}
+                    </p>
+                    {% if event.price %}
+                    <p class="card-text">
+                        <strong>{% translate "Price" %}:</strong> {{ event.price }} 
+                    </p>
+                    {% endif %}
+
+                    {% if event.contact_info %}
+                    <p class="card-text">
+                        <strong>{% translate "Contact" %}:</strong> {{ event.contact_info }} 
+                    </p>
+                    {% endif %}
+
+                    {% if event.capacity %}
+                    <p class="card-text">
+                        <strong>{% translate "Capacity" %}:</strong> {{ event.capacity }} 
+                    </p>
+                    {% endif %}
+
+                    {% if event.ticket_link and event.status != 'past' %}
+                    <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
+                    {% endif %}
+                    <h3>{% translate "Location" %}</h3>
+                    {% if event.maps_iframe %}
+                    <div class="mt-4">
+                        {{ event.maps_iframe|safe }}
+                    </div>
+                    {% endif %}
+                    
+
+                    <!-- Additional Images Section -->
+            {% if event.images.exists %}
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="card-title">{% translate "Event Gallery" %}</h4>
+                    <div class="row">
+                        {% for image in event.images.all %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <img src="{{ image.image.url }}" class="card-img-top img-fluid cursor-pointer" alt="{{ image.caption }}" 
+                                    data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-slide-to="{{ forloop.counter0 }}" />
+                                {% if image.caption %}
+                                <div class="card-body">
+                                    <p class="card-text">{{ image.caption }}</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal with Carousel -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">{% translate "Event Gallery" %}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for image in event.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.caption }}">
+                                        {% if image.caption %}
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <p>{{ image.caption }}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">{% translate "Previous" %}</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">{% translate "Next" %}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="mb-4">
+                <h4>{% translate "Upcoming Events" %}</h4>
+                {% for future_event in future_events %}
+                <div class="card my-3">
+                <img src="{{ future_event.featured_image.url }}" class="card-img-top" alt="{{ future_event.event_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ future_event.event_name }}</h5>
+                    <p class="card-text">
+                        <small>{{ future_event.date }}{% if future_event.time %}, {{ future_event.time }}{% endif %}</small>
+                    </p>
+                    <p class="card-text">{{ future_event.description|truncatewords:20 }}</p>
+                    <a href="{% url 'event_detail' future_event.id %}" class="btn btn-primary">{% translate "See Details" %}</a>
+                </div>
+                </div>
+                {% empty %}
+                    <p>{% translate "No upcoming events found." %}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <h4>{% translate "Past Events" %}</h4>
+                {% for past_event in past_events %}
+                <div class="card my-3">
+                <img src="{{ past_event.featured_image.url }}" class="card-img-top" alt="{{ past_event.event_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ past_event.event_name }}</h5>
+                    <p class="card-text">
+                        <small>{{ past_event.date }}{% if past_event.time %}, {{ past_event.time }}{% endif %}</small>
+                    </p>
+                    <p class="card-text">{{ past_event.description|truncatewords:20 }}</p>
+                    <a href="{% url 'event_detail' past_event.id %}" class="btn btn-primary">{% translate "See Details" %}</a>
+                </div>
+                </div>
+                {% empty %}
+                    <p>{% translate "No upcoming events found." %}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var myCarousel = document.getElementById('carouselExample');
+
+        myCarousel.addEventListener('slide.bs.carousel', function (event) {
+            var activeIndex = event.from;
+            var items = myCarousel.querySelectorAll('.carousel-item');
+
+            items.forEach(function (item, index) {
+                if (index === activeIndex) {
+                    item.classList.remove('active');
+                }
+            });
+        });
+
+        document.querySelectorAll('.card img[data-bs-toggle="modal"]').forEach(function (img) {
+            img.addEventListener('click', function () {
+                var slideIndex = parseInt(img.getAttribute('data-bs-slide-to'));
+                var items = myCarousel.querySelectorAll('.carousel-item');
+
+                items.forEach(function (item, index) {
+                    item.classList.remove('active');
+                    if (index === slideIndex) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+{% endblock %}

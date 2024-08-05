@@ -1,0 +1,14 @@
+@use '../custom' as *;
+
+.social-media a {
+    color: white; /* Change this to the desired color */
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    color: #ccc; /* Optional: Change color on hover */
+}
+
+.useful-links ul {
+    list-style-type: none;
+}

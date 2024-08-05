@@ -1,0 +1,16 @@
+{
+  "name": "sufi_meshk_html",
+  "version": "1.0.0",
+  "description": "sufi meshk ensemble website",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "sass --watch scss:sufi_meshk/static/css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "bootstrap": "^5.3.3",
+    "sass": "^1.77.6"
+  }
+}

@@ -1,0 +1,12 @@
+// Custom Bootstrap theme colors
+$primary: #FFC107 !default; // Yellow from the sun
+$secondary: #333333 !default; // Dark gray, nearly black
+$success: #4CAF50 !default; // Green tone
+$info: #2196F3 !default; // Blue tone
+$warning: #9C27B0 !default; // Purple tone
+$danger: #F44336 !default; // Red tone
+$light: #F5F5F5 !default; // Light gray
+$dark: #000000 !default; // Black
+
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

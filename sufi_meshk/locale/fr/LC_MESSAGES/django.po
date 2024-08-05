@@ -1,0 +1,546 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-03 09:19+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\templates\about-us.html:7 .\templates\about-us.html:12
+#: .\templates\about-us.html:18
+msgid ""
+"Sufi Meshk Ensemble - Authentic Classical Turkish Music and Mevlevi Rites"
+msgstr "Sufi Meshk Ensemble - Musique classique turque authentique et rites mevlevis"
+
+#: .\templates\about-us.html:8
+#, fuzzy
+#| msgid ""
+#| "We preserve and perform the rich traditions of Classical Turkish Music "
+#| "and the Mevlevi Rites, inspired by Mevlana Jalaluddin Rumi. Our "
+#| "passionate performances connect the ancient musical heritage of Anatolia "
+#| "with contemporary audiences, presenting the infinite beauty of Sufi music."
+msgid ""
+"Experience the rich traditions of Classical Turkish Music and Mevlevi Rites "
+"with the Sufi Meshk Ensemble. Inspired by Mevlana Jalaluddin Rumi, our "
+"performances celebrate love, tolerance, and spirituality."
+msgstr ""
+"Nous préservons et interprétons les riches traditions de la musique turque "
+"classique et des rites mevlevis, inspirés par Mevlana Jalaluddin Rumi. Nos "
+"performances passionnées relient l'ancien héritage musical de l'Anatolie "
+"avec les auditoires contemporains, présentant l'infinie beauté de la musique "
+"soufie."
+
+#: .\templates\about-us.html:9
+msgid ""
+"Sufi Meshk Ensemble, Classical Turkish Music, Mevlevi Rites, Mevlana "
+"Jalaluddin Rumi, Sufi music, Turkish music, spiritual music, Sufi mysticism, "
+"love, tolerance, spirituality, music ensemble"
+msgstr "Ensemble Sufi Meshk, Musique classique turque, Rites mevlevis, Mevlana Jalaluddin Rumi, Musique soufie, Musique turque, Musique spirituelle, Mystique soufie, Amour, Tolérance, Spiritualité, Ensemble musical"
+
+#: .\templates\about-us.html:10
+#, fuzzy
+#| msgid "Welcome to the Sufi Meshk Ensemble"
+msgid "Sufi Meshk Ensemble"
+msgstr "Bienvenue à l'Ensemble Sufi Meshk"
+
+#: .\templates\about-us.html:13
+#| msgid ""
+#| "Join us as we celebrate the timeless beauty of Sufi music, bringing the "
+#| "mystical sounds of the past into the present with passion and reverence."
+msgid ""
+"Join the Sufi Meshk Ensemble in celebrating the timeless beauty of Sufi "
+"music, deeply rooted in the traditions of Classical Turkish Music and "
+"Mevlevi Rites."
+msgstr ""
+"Rejoignez-nous pour célébrer la beauté intemporelle de la musique soufie, "
+"introduisant les sons mystiques du passé dans le présent avec passion et "
+"respect."
+
+#: .\templates\about-us.html:19
+msgid ""
+"Experience the profound spiritual and cultural heritage of Sufi music with "
+"the Sufi Meshk Ensemble."
+msgstr "Vivez l'héritage spirituel et culturel profond de la musique soufie avec l'Ensemble Sufi Meshk."
+
+#: .\templates\about-us.html:31
+#: .\templates\index_partials\_music_example.html:5
+msgid "The Essence of Our Music"
+msgstr "L'essence de notre musique"
+
+#: .\templates\about-us.html:34
+#: .\templates\index_partials\_music_example.html:9
+msgid ""
+"The essence of our music lies in its profound spiritual and cultural "
+"heritage. Rooted in the rich traditions of Classical Turkish Music and the "
+"Mevlevi Rites, our performances are a journey into the heart of Sufi "
+"mysticism. This music, which dates back to 1300 A.D., is not just an "
+"auditory experience but a bridge connecting us to the divine and to each "
+"other."
+msgstr ""
+"L'essence de notre musique réside dans son profond héritage spirituel et "
+"culturel. Ancrées dans les riches traditions de la musique classique turque "
+"et des rites Mevlevi, nos performances sont un voyage au cœur du mysticisme "
+"soufi. Cette musique, qui remonte à 1300 après J.-C., n'est pas seulement "
+"une expérience auditive mais un pont qui nous relie au divin et les uns aux "
+"autres."
+
+#: .\templates\about-us.html:35
+#: .\templates\index_partials\_music_example.html:12
+msgid ""
+"Our repertoire is deeply influenced by the teachings of Mevlana Jalaluddin "
+"Rumi and other Sufi masters, whose poetry and philosophy emphasize love, "
+"tolerance, and the unity of all beings. The intricate melodies, rhythmic "
+"cycles, and poetic lyrics of our music are designed to elevate the soul, "
+"encouraging a state of inner peace and reflection."
+msgstr ""
+"Notre répertoire est profondément influencé par les enseignements de Mevlana "
+"Jalaluddin Rumi et d'autres maîtres soufis, dont la poésie et la philosophie "
+"mettent l'accent sur l'amour, la tolérance et l'unité de tous les êtres. Les "
+"mélodies complexes, les cycles rythmiques et les paroles poétiques de notre "
+"musique sont conçus pour élever l'âme, encourageant un état de paix "
+"intérieure et de réflexion."
+
+#: .\templates\about-us.html:36
+#: .\templates\index_partials\_music_example.html:15
+msgid ""
+"At Sufi Meshk Ensemble, we strive to preserve the authenticity and purity of "
+"this ancient art form. Through meticulous practice and heartfelt "
+"performance, we aim to share the timeless beauty of Sufi music, inviting our "
+"audience to experience its transformative power."
+msgstr ""
+"Chez Sufi Meshk Ensemble, nous nous efforçons de préserver l'authenticité et "
+"la pureté de cette forme d'art ancienne. Grâce à une pratique méticuleuse et "
+"des performances sincères, nous visons à partager la beauté intemporelle de "
+"la musique soufie, invitant notre public à découvrir son pouvoir "
+"transformateur."
+
+#: .\templates\about-us.html:69 .\templates\event-detail.html:127
+msgid "Previous"
+msgstr "Précédent"
+
+#: .\templates\about-us.html:73 .\templates\event-detail.html:131
+msgid "Next"
+msgstr "Suivant"
+
+#: .\templates\about-us.html:82
+msgid "Video"
+msgstr "Vidéo"
+
+#: .\templates\about-us.html:100
+msgid "Group Members"
+msgstr "Membres du groupe"
+
+#: .\templates\about-us.html:110
+msgid "Instrument/Duty:"
+msgstr "Instrument/Tâche"
+
+#: .\templates\about-us.html:115 .\templates\index_partials\_about_us.html:17
+#: .\templates\updates.html:24
+msgid "Read More"
+msgstr "En savoir plus"
+
+#: .\templates\aboutus_partials\_banner.html:6
+#: .\templates\index_partials\_about_us.html:6
+#: .\templates\layout_partials\_footer.html:30
+#: .\templates\layout_partials\_nav.html:15 .\website\views.py:38
+msgid "About Us"
+msgstr "À propos de nous"
+
+#: .\templates\aboutus_partials\_banner.html:7
+msgid ""
+"Welcome to the world of the Sufi Meshk Ensemble, a dedicated group of "
+"musicians committed to preserving and performing the rich traditions of "
+"Classical Turkish Music and the Mevlevi Rites. Our ensemble takes "
+"inspiration from the teachings of Mevlana Jalaluddin Rumi, aiming to convey "
+"his profound messages of love, tolerance, and spirituality through our music."
+msgstr ""
+"Bienvenue dans le monde du Sufi Meshk Ensemble, un groupe dévoué de "
+"musiciens engagés à préserver et à interpréter les riches traditions de la "
+"musique classique turque et des rites Mevlevi. Notre ensemble s'inspire des "
+"enseignements de Mevlana Jalaluddin Rumi, dans le but de transmettre ses "
+"profonds messages d'amour, de tolérance et de spiritualité à travers notre "
+"musique."
+
+#: .\templates\aboutus_partials\_banner.html:8
+msgid ""
+"Founded on the principles of meticulousness and discipline, the Sufi Meshk "
+"Ensemble strives to present the most authentic and enchanting renditions of "
+"Sufi music, honoring the legacy of the Mevlevi Order. Our performances are a "
+"journey through time, connecting the ancient musical heritage of Anatolia "
+"with contemporary audiences."
+msgstr ""
+"Fondé sur les principes de minutie et de discipline, l'ensemble Sufi Meshk "
+"s'efforce de présenter les interprétations les plus authentiques et les plus "
+"enchanteresses de la musique soufie, honorant l'héritage de l'ordre Mevlevi. "
+"Nos performances sont un voyage dans le temps, reliant l'héritage musical "
+"ancien de l'Anatolie au public contemporain."
+
+#: .\templates\aboutus_partials\_banner.html:9
+msgid ""
+"Join us as we celebrate the timeless beauty of Sufi music, bringing the "
+"mystical sounds of the past into the present with passion and reverence."
+msgstr ""
+"Rejoignez-nous pour célébrer la beauté intemporelle de la musique soufie, "
+"introduisant les sons mystiques du passé dans le présent avec passion et "
+"respect."
+
+#: .\templates\aboutus_partials\_our_journey.html:6
+msgid "Our Journey"
+msgstr "Notre voyage"
+
+#: .\templates\aboutus_partials\_our_journey.html:11
+msgid ""
+"We are passionate devotees of Sufi music, an exquisite art form with roots "
+"that trace back to 1300 A.D. Our journey began with a shared love for this "
+"timeless musical tradition, which embodies the spiritual and cultural "
+"heritage of the Mevlevi Order. Through our performances, we aim to honor and "
+"preserve the profound beauty and depth of Sufi music, bringing its "
+"transcendent melodies to contemporary audiences."
+msgstr ""
+"Nous sommes des passionnés de musique soufie, une forme d'art exquise dont "
+"les racines remontent à 1300 après J.-C. Notre voyage a commencé par un "
+"amour commun pour cette tradition musicale intemporelle, qui incarne "
+"l'héritage spirituel et culturel de l'Ordre Mevlevi. À travers nos "
+"performances, nous visons à honorer et à préserver la profonde beauté et la "
+"profondeur de la musique soufie, en apportant ses mélodies transcendantes au "
+"public contemporain."
+
+#: .\templates\event-detail.html:29
+msgid "Event Details"
+msgstr "Détails de l'événement"
+
+#: .\templates\event-detail.html:41 .\templates\future_events.html:23
+#: .\templates\past_events.html:23
+msgid "Date"
+msgstr "Date"
+
+#: .\templates\event-detail.html:45
+msgid "End Date"
+msgstr "Date de fin"
+
+#: .\templates\event-detail.html:49 .\templates\future_events.html:24
+#: .\templates\past_events.html:24
+msgid "Place"
+msgstr "Lieu"
+
+#: .\templates\event-detail.html:53
+msgid "Price"
+msgstr "Prix"
+
+#: .\templates\event-detail.html:59
+msgid "Contact"
+msgstr "Contact"
+
+#: .\templates\event-detail.html:65
+msgid "Capacity"
+msgstr "Capacité"
+
+#: .\templates\event-detail.html:70
+msgid "Buy Tickets"
+msgstr "Acheter des billets"
+
+#: .\templates\event-detail.html:72
+msgid "Location"
+msgstr "Lieu"
+
+#: .\templates\event-detail.html:84 .\templates\event-detail.html:108
+#, fuzzy
+#| msgid "Gallery"
+msgid "Event Gallery"
+msgstr "Galerie"
+
+#: .\templates\event-detail.html:145
+msgid "Upcoming Events"
+msgstr "Événements à venir"
+
+#: .\templates\event-detail.html:155 .\templates\event-detail.html:173
+#: .\templates\future_events.html:25 .\templates\index.html:45
+#: .\templates\past_events.html:25
+msgid "See Details"
+msgstr "Voir les détails"
+
+#: .\templates\event-detail.html:159 .\templates\event-detail.html:177
+#: .\templates\index.html:51
+msgid "No upcoming events found."
+msgstr "Aucun événement à venir trouvé."
+
+#: .\templates\event-detail.html:163
+msgid "Past Events"
+msgstr "Événements passés"
+
+#: .\templates\future_events.html:8 .\templates\index.html:34
+#: .\templates\layout_partials\_footer.html:32
+#: .\templates\layout_partials\_nav.html:25 .\website\views.py:65
+msgid "Future Events"
+msgstr "Événements à venir"
+
+#: .\templates\future_events.html:32
+msgid ""
+"For now, no events are planned, but keep an eye on our social media and "
+"website for future gatherings."
+msgstr ""
+"Pour le moment, aucun événement n'est prévu, mais surveillez nos réseaux "
+"sociaux et notre site web pour les futurs rassemblements."
+
+#: .\templates\future_events.html:33
+msgid ""
+"In this moment of stillness, we await the whirling of future gatherings."
+msgstr ""
+"Dans ce moment de calme, nous attendons avec impatience les futurs "
+"rassemblements."
+
+#: .\templates\future_events.html:34
+msgid "No events"
+msgstr "Aucun événement"
+
+#: .\templates\index_partials\_about_us.html:15
+msgid ""
+"The origins of music lie in humanity's desire to communicate with the "
+"divine. In ancient times, instruments made from natural materials were used "
+"in religious rituals. In Anatolia, religious music that began in Göbeklitepe "
+"evolved further with the arrival of the Turks and the spread of Islam. In "
+"the 13th and 14th centuries, thinkers like Yunus Emre, Hacı Bektaş Veli, and "
+"Mevlana Rumi spread their teachings through music and poetry. After "
+"Mevlana's death, the Mevlevi Order was established, and music played an "
+"important role in transmitting Mevlevi teachings."
+msgstr ""
+"Les origines de la musique résident dans le désir de l'humanité de "
+"communiquer avec le divin. Dans les temps anciens, des instruments fabriqués "
+"à partir de matériaux naturels étaient utilisés dans les rituels religieux. "
+"En Anatolie, la musique religieuse qui a commencé à Göbeklitepe a évolué "
+"avec l'arrivée des Turcs et la propagation de l'Islam. Aux XIIIe et XIVe "
+"siècles, des penseurs comme Yunus Emre, Hacı Bektaş Veli et Mevlana Rumi ont "
+"diffusé leurs enseignements à travers la musique et la poésie. Après la mort "
+"de Mevlana, l'Ordre Mevlevi a été fondé, et la musique a joué un rôle "
+"important dans la transmission des enseignements Mevlevis."
+
+#: .\templates\index_partials\_about_us.html:16
+msgid ""
+"Mevlevi lodges became centers for art education, elevating music to "
+"professional levels. The Mevlevi Ceremonies, as the most magnificent form of "
+"Sufi music, created a rich musical heritage and allowed the integration of "
+"Turkish musical instruments. Classical Turkish Music, enriched by Mevlevi "
+"Ceremonies, gained significant recognition in world music. The Sufi Meshk "
+"Ensemble continues to preserve and honor this heritage, working to "
+"standardize the Mevlevi Ceremonies."
+msgstr ""
+"Les loges Mevlevis sont devenues des centres d'éducation artistique, élevant "
+"la musique à des niveaux professionnels. Les Cérémonies Mevlevis, forme la "
+"plus magnifique de la musique soufie, ont créé un riche patrimoine musical "
+"et permis l'intégration des instruments de musique turcs. La musique "
+"classique turque, enrichie par les Cérémonies Mevlevis, a gagné une "
+"reconnaissance significative dans la musique mondiale. L'ensemble Sufi Meshk "
+"continue de préserver et d'honorer ce patrimoine, travaillant à standardiser "
+"les Cérémonies Mevlevis."
+
+#: .\templates\index_partials\_banner.html:6
+msgid "Welcome to the Sufi Meshk Ensemble"
+msgstr "Bienvenue à l'Ensemble Sufi Meshk"
+
+#: .\templates\index_partials\_banner.html:7
+msgid ""
+"We preserve and perform the rich traditions of Classical Turkish Music and "
+"the Mevlevi Rites, inspired by Mevlana Jalaluddin Rumi. Our passionate "
+"performances connect the ancient musical heritage of Anatolia with "
+"contemporary audiences, presenting the infinite beauty of Sufi music."
+msgstr ""
+"Nous préservons et interprétons les riches traditions de la musique turque "
+"classique et des rites mevlevis, inspirés par Mevlana Jalaluddin Rumi. Nos "
+"performances passionnées relient l'ancien héritage musical de l'Anatolie "
+"avec les auditoires contemporains, présentant l'infinie beauté de la musique "
+"soufie."
+
+#: .\templates\index_partials\_faq.html:5
+msgid "Frequently Asked Questions"
+msgstr "Questions fréquemment posées"
+
+#: .\templates\index_partials\_gallery.html:6
+msgid "Gallery"
+msgstr "Galerie"
+
+#: .\templates\index_partials\_gallery.html:40
+msgid "Click For More Images..."
+msgstr "Cliquez pour plus d'images..."
+
+#: .\templates\index_partials\_music_example.html:27
+msgid "Click For More Music..."
+msgstr "Cliquez pour plus de musique..."
+
+#: .\templates\layout_partials\_footer.html:31
+#: .\templates\layout_partials\_nav.html:18
+msgid "FAQ"
+msgstr "FAQ"
+
+#: .\templates\layout_partials\_footer.html:33
+#: .\templates\layout_partials\_nav.html:26 .\templates\past_events.html:8
+#: .\website\views.py:72
+msgid "Old Events"
+msgstr "Anciens événements"
+
+#: .\templates\layout_partials\_footer.html:34
+#: .\templates\layout_partials\_nav.html:30 .\website\views.py:53
+msgid "Media"
+msgstr "Médias"
+
+#: .\templates\layout_partials\_footer.html:35
+#: .\templates\layout_partials\_nav.html:33 .\templates\updates.html:8
+#: .\website\views.py:59
+msgid "Updates"
+msgstr "Actualités"
+
+#: .\templates\layout_partials\_nav.html:22
+msgid "Events"
+msgstr "Événements"
+
+#: .\templates\layout_partials\_nav.html:37
+msgid "Language"
+msgstr "Langue"
+
+#: .\templates\past_events.html:32
+msgid "No future events found."
+msgstr "Événements à venir"
+
+#: .\templates\updates.html:23
+msgid "Release date"
+msgstr "Date de sortie"
+
+#: .\website\models.py:61
+msgid "Upcoming"
+msgstr "À venir"
+
+#: .\website\models.py:62
+msgid "Ongoing"
+msgstr "En cours"
+
+#: .\website\models.py:63
+msgid "Past"
+msgstr "Passé"
+
+#: .\website\views.py:30
+msgid "Home"
+msgstr ""
+
+#~ msgid "No past events found."
+#~ msgstr "Aucun événement passé trouvé."
+
+#~| msgid "Gallery"
+#~ msgid "Galerie d'événements"
+#~ msgstr "Galerie"
+
+#~ msgid "Event Ended"
+#~ msgstr "Événement terminé"
+
+#~ msgid "Music"
+#~ msgstr "Musique"
+
+#, fuzzy
+#~| msgid "Read More"
+#~ msgid "Read more"
+#~ msgstr "En savoir plus"
+
+#~ msgid "News"
+#~ msgstr "Actualités"
+
+#~ msgid ""
+#~ "The origins of music likely began with humanity's desire to communicate "
+#~ "with the divine. In ancient times, people used natural materials like "
+#~ "wood, animal skin, and horsehair, alongside their voices, to create "
+#~ "instruments for religious rituals. Over time, the music used in these "
+#~ "rituals evolved into sophisticated art forms."
+#~ msgstr ""
+#~ "Les origines de la musique ont probablement commencé avec le désir de "
+#~ "l'humanité de communiquer avec le divin. Dans l'Antiquité, les gens "
+#~ "utilisaient des matériaux naturels tels que le bois, la peau d'animal et "
+#~ "les crins de cheval, ainsi que leur voix, pour créer des instruments pour "
+#~ "les rituels religieux. Au fil du temps, la musique utilisée dans ces "
+#~ "rituels a évolué vers des formes d'art sophistiquées."
+
+#~ msgid ""
+#~ "In Anatolia, home to the ancient ruins of Göbeklitepe, believed to be the "
+#~ "oldest structure in human history, various forms of religious music "
+#~ "emerged. Following the arrival of the Turks in this region, the efforts "
+#~ "to spread Islam intensified. The late 13th and early 14th centuries, "
+#~ "marked by the decline of the Anatolian Seljuk State and the Mongol "
+#~ "invasions, were times of chaos in Anatolia. During this period, thinkers "
+#~ "like Yunus Emre (1238? - 1328?), Hacı Bektaş Veli (1209 - 1271), and "
+#~ "Mevlana Jalaluddin Rumi (1207 - 1273) emphasized love, tolerance, and "
+#~ "humanity in their teachings."
+#~ msgstr ""
+#~ "En Anatolie, où se trouvent les ruines antiques de Göbeklitepe, "
+#~ "considérées comme la plus ancienne structure de l'histoire humaine, "
+#~ "différentes formes de musique religieuse ont émergé. Après l'arrivée des "
+#~ "Turcs dans cette région, les efforts pour diffuser l'islam se sont "
+#~ "intensifiés. La fin du XIIIe et le début du XIVe siècle, marqués par le "
+#~ "déclin de l'État seldjoukide d'Anatolie et les invasions mongoles, ont "
+#~ "été des périodes chaotiques en Anatolie. Pendant cette période, des "
+#~ "penseurs comme Yunus Emre (1238? - 1328?), Hacı Bektaş Veli (1209 - 1271) "
+#~ "et Mevlana Jalaluddin Rumi (1207 - 1273) ont mis l'accent sur l'amour, la "
+#~ "tolérance et l'humanité dans leurs enseignements."
+
+#~ msgid ""
+#~ "After the passing of Mevlana Jalaluddin Rumi, his son Sultan Veled and "
+#~ "close followers founded the Mevlevi Order based on Rumi's philosophies. "
+#~ "Music and poetry played crucial roles in transmitting Mevlevi teachings "
+#~ "to future generations, establishing Mevleviism as a significant cultural "
+#~ "and spiritual school. Over time, Mevlevi lodges supported and elevated "
+#~ "music to professional levels, functioning like conservatories that "
+#~ "provided artistic education of the era. The musical and dance-filled "
+#~ "religious gatherings initiated during Mevlana Rumi's life eventually "
+#~ "evolved into the Mevlevi Rituals."
+#~ msgstr ""
+#~ "Après la disparition de Mevlana Jalaluddin Rumi, son fils Sultan Veled et "
+#~ "ses disciples proches ont fondé l'Ordre Mevlevi basé sur les philosophies "
+#~ "de Rumi. La musique et la poésie ont joué des rôles cruciaux dans la "
+#~ "transmission des enseignements mevlevis aux générations futures, "
+#~ "établissant le mevlevisme comme une école culturelle et spirituelle "
+#~ "importante. Avec le temps, les lodges mevlevis ont soutenu et élevé la "
+#~ "musique à des niveaux professionnels, fonctionnant comme des "
+#~ "conservatoires offrant une éducation artistique de l'époque. Les "
+#~ "rassemblements religieux remplis de musique et de danse initiés pendant "
+#~ "la vie de Mevlana Rumi ont finalement évolué vers les Rituelles Mevlevi."
+
+#~ msgid ""
+#~ "The development of the Mevlevi Rituals, the grandest form of Sufi music, "
+#~ "fostered a rich musical heritage, producing distinguished composers and "
+#~ "incorporating Turkish musical instruments into Mevlevi music. Classical "
+#~ "Turkish Music, enriched by the Mevlevi Rituals, has achieved notable "
+#~ "progress and holds an important place in world music. This genre, a "
+#~ "product of Central Asian, Seljuk, and especially Ottoman civilizations, "
+#~ "influenced and integrated the music of many cultures, resulting in a rich "
+#~ "diversity of musical techniques, forms, and rhythms."
+#~ msgstr ""
+#~ "Le développement des Rituelles Mevlevi, la forme la plus grandiose de la "
+#~ "musique soufie, a favorisé un riche patrimoine musical, produisant des "
+#~ "compositeurs distingués et intégrant des instruments de musique turcs "
+#~ "dans la musique mevlevi. La musique turque classique, enrichie par les "
+#~ "Rituelles Mevlevi, a réalisé des progrès notables et occupe une place "
+#~ "importante dans la musique mondiale. Ce genre, produit des civilisations "
+#~ "d'Asie centrale, seldjoukides et surtout ottomanes, a influencé et "
+#~ "intégré la musique de nombreuses cultures, résultant en une riche "
+#~ "diversité de techniques musicales, de formes et de rythmes."
+
+#~ msgid ""
+#~ "As the Sufi Meshk Ensemble, we are dedicated to conveying the teachings "
+#~ "of Mevlana Jalaluddin Rumi and showcasing the Mevlevi Rituals, known as "
+#~ "the most splendid form of Classical Turkish Music, in their standardized "
+#~ "form. We continue our work with meticulousness and discipline, striving "
+#~ "to honor and preserve this profound musical heritage."
+#~ msgstr ""
+#~ "En tant qu'Ensemble Sufi Meshk, nous nous consacrons à transmettre les "
+#~ "enseignements de Mevlana Jalaluddin Rumi et à présenter les Rituelles "
+#~ "Mevlevi, connus comme la forme la plus splendide de la musique turque "
+#~ "classique, dans leur forme standardisée. Nous continuons notre travail "
+#~ "avec minutie et discipline, cherchant à honorer et à préserver cet "
+#~ "héritage musical profond."

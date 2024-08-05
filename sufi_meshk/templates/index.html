@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+
+
+{% include "_metatags_partials.html" %}
+
+
+
+<style>
+  .d-flex {
+      display: flex;
+  }
+  .flex-wrap {
+      flex-wrap: wrap;
+  }
+  .justify-content-center {
+      justify-content: center;
+  }
+  .align-items-center {
+      align-items: center;
+  }
+</style>
+
+
+{% endblock %}
+
+
+{% block main %}
+  {% include "index_partials/_banner.html" %}
+
+  <div class="container">
+    <div class="row mb-5">
+        <div class="col">
+            <h2 class="text-center">{% translate "Future Events" %}</h2>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center g-4">
+        {% for event in future_events %}
+        <div class="d-flex justify-content-center mb-4" style="flex: 0 0 33%; max-width: 33%;">
+            <div class="card h-100" style="width: 100%; max-width: 300px;">
+                <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.event_name }}</h5>
+                    <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">{% translate "See Details" %}</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p class="text-muted text-center">{% translate "No upcoming events found." %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+  {% include "index_partials/_about_us.html" %}
+
+  {% include "index_partials/_gallery.html" %}
+
+  {% include "index_partials/_music_example.html" %}
+
+  {% include "index_partials/_faq.html" %}
+
+
+  
+  
+{% endblock %}

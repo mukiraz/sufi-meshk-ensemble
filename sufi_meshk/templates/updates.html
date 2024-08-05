@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    {% include "_metatags_partials.html" %}
+{% endblock %}
+
+{% block main %}
+  <div class="container mt-5">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center">{% translate "Updates" %}</h2>
+        </div>
+    </div>
+    <div class="row mt-3">
+        {% for update in updates %}
+        <div class="col-md-12 mb-3">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <img src="{{ update.featured_image.url }}" class="img-fluid rounded-start" alt="{{ update.title }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ update.title }}</h5>
+                            <p class="card-text">{{ update.short_description }}</p>
+                            <p class="card-text"><small class="text-body-secondary">{% translate "Release date" %}: {{ update.release_date }}</small></p>
+                            <a href="{{ update.external_link }}" class="btn btn-primary" target="_blank">{% translate "Read More" %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

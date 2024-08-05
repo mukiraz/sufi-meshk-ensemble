@@ -1,0 +1,131 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    {% include "_metatags_partials.html" %}
+{% endblock %}
+
+{% block main %}
+
+{% include "aboutus_partials/_banner.html" %}
+
+<section class="container mt-5 our-journey">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center my-3">{% translate "The Essence of Our Music" %}</h2>
+        </div>
+        <div class="col">
+            <p>{% blocktrans %}The essence of our music lies in its profound spiritual and cultural heritage. Rooted in the rich traditions of Classical Turkish Music and the Mevlevi Rites, our performances are a journey into the heart of Sufi mysticism. This music, which dates back to 1300 A.D., is not just an auditory experience but a bridge connecting us to the divine and to each other.{% endblocktrans %}</p>
+            <p>{% blocktrans %}Our repertoire is deeply influenced by the teachings of Mevlana Jalaluddin Rumi and other Sufi masters, whose poetry and philosophy emphasize love, tolerance, and the unity of all beings. The intricate melodies, rhythmic cycles, and poetic lyrics of our music are designed to elevate the soul, encouraging a state of inner peace and reflection.{% endblocktrans %}</p>
+            <p>{% blocktrans %}At Sufi Meshk Ensemble, we strive to preserve the authenticity and purity of this ancient art form. Through meticulous practice and heartfelt performance, we aim to share the timeless beauty of Sufi music, inviting our audience to experience its transformative power.{% endblocktrans %}</p>
+        
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://img.youtube.com/vi/nct6LoEToyI/0.jpg" class="d-block w-100" alt="Slide 1" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="https://www.youtube.com/embed/nct6LoEToyI?autoplay=1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.youtube.com/vi/3VJHoOQM_kI/0.jpg" class="d-block w-100" alt="Slide 2" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="https://www.youtube.com/embed/3VJHoOQM_kI?autoplay=1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.youtube.com/vi/mGUV8z18W0I/0.jpg" class="d-block w-100" alt="Slide 3" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="https://www.youtube.com/embed/mGUV8z18W0I?autoplay=1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.youtube.com/vi/a5pDmy8I92Q/0.jpg" class="d-block w-100" alt="Slide 4" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="https://www.youtube.com/embed/a5pDmy8I92Q?autoplay=1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://img.youtube.com/vi/_YY9Gitt-Oc/0.jpg" class="d-block w-100" alt="Slide 5" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="https://www.youtube.com/embed/_YY9Gitt-Oc?autoplay=1">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">{% translate "Previous" %}</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">{% translate "Next" %}</span>
+                </button>
+            </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="videoModalLabel">{% translate "Video" %}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ratio ratio-16x9">
+                                <iframe id="videoFrame" src="" title="YouTube video" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-4">
+</section>
+
+<section class="container mt-5">
+    <div class="row">
+        <h2 class="text-center">{% translate "Group Members" %}</h2>
+    </div>
+    <div class="row mt-3">
+        {% for member in group_members %}
+            {% if member.is_active %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ member.photo.url }}" class="card-img-top" alt="{{ member.name }} {{ member.surname }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ member.name }} {{ member.surname }}</h5>
+                        <p class="card-text"><strong>{% translate "Instrument/Duty:" %}</strong> {{ member.instrument_duty }}</p>
+                        <p class="card-text">{{ member.short_description }}</p>
+                        
+                        
+                    </div>
+                    <div class="card-footer bg-transparent"><a href="{% url 'group-member-detail' member.id %}" class="btn btn-primary">{% translate "Read More" %}</a></div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</section>
+
+
+
+{% block custom-js %}
+
+<script>
+    var videoModal = document.getElementById('videoModal');
+    videoModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var videoUrl = button.getAttribute('data-video-url');
+        var videoFrame = document.getElementById('videoFrame');
+        videoFrame.src = videoUrl;
+    });
+
+    videoModal.addEventListener('hide.bs.modal', function (event) {
+        var videoFrame = document.getElementById('videoFrame');
+        videoFrame.src = '';
+    });
+</script>
+  
+{% endblock custom-js %}
+
+  
+{% endblock %}

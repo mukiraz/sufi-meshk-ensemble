@@ -1,0 +1,24 @@
+{% load static %}
+{% load i18n %}
+<section class="container">
+  <div class="row mb-5">
+    <div class="col">
+      <h2 class="text-center">{% translate "About Us" %}</h2>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-md-5">
+      <img src="{% static 'img/home/about-us.jpeg' %}" alt="" class="rounded mx-auto d-block img-fluid" data-bs-toggle="modal" data-bs-target="#imageModal" style="cursor: pointer;" />
+    </div>
+    <div class="col-md-7">      
+      
+      <p>{% blocktrans %}The origins of music lie in humanity's desire to communicate with the divine. In ancient times, instruments made from natural materials were used in religious rituals. In Anatolia, religious music that began in Göbeklitepe evolved further with the arrival of the Turks and the spread of Islam. In the 13th and 14th centuries, thinkers like Yunus Emre, Hacı Bektaş Veli, and Mevlana Rumi spread their teachings through music and poetry. After Mevlana's death, the Mevlevi Order was established, and music played an important role in transmitting Mevlevi teachings.{% endblocktrans %}</p>
+      <p>{% blocktrans %}Mevlevi lodges became centers for art education, elevating music to professional levels. The Mevlevi Ceremonies, as the most magnificent form of Sufi music, created a rich musical heritage and allowed the integration of Turkish musical instruments. Classical Turkish Music, enriched by Mevlevi Ceremonies, gained significant recognition in world music. The Sufi Meshk Ensemble continues to preserve and honor this heritage, working to standardize the Mevlevi Ceremonies.{% endblocktrans %}</p>
+      <a href="{% url 'about_us' %}" class="btn btn-primary">{% translate "Read More" %}</a>
+    </div>
+    
+  </div>
+  <hr class="mt-5">
+</section>
+
+{% include "index_partials/_image_modal.html" %}

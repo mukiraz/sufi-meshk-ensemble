@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block meta %}
+    {% include "_metatags_partials.html" %}
+{% endblock %}
+
+
+{% block main %}
+<div class="container mt-5">
+    <h1 class="text-center my-4">{{ member.name }} {{ member.surname }}</h1>
+    <div class="row">
+        <div class="col-md-4 member-photo">
+            <img class="img-fluid" src="{{ member.photo.url }}" alt="{{ member.name }} {{ member.surname }}">
+        </div>
+
+        <div class="col-md-8 member-info">
+            <p><strong>Instrument/Duty:</strong> {{ member.instrument_duty }}</p>
+            <p>{{ member.description|safe }}</p>
+            
+        </div>
+    </div>
+</div>
+  
+{% endblock %}
