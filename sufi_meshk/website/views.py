@@ -47,6 +47,7 @@ class PageObjects():
         return self.objects
     
     def get_gallery_view_objects(self):
+        self.get_footer_objects()
         s3 = boto3.client('s3')
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
         prefix = 'media/gallery/'  # Folder path in S3 bucket
@@ -69,18 +70,21 @@ class PageObjects():
         return self.objects
 
     def get_updates_view_objects(self):
+        self.get_footer_objects()
         updates = Update.objects.filter(is_active=True)
         self.objects["updates"] = updates
         self.objects["title"] = _("Updates")
         return self.objects
 
     def get_future_events_view(self):
+        self.get_footer_objects()
         # Filter events that are upcoming or ongoing
         self.objects["future_events"] = self.get_future_events()
         self.objects["title"] = _("Future Events")
         return self.objects
 
     def get_past_events_view(self):
+        self.get_footer_objects()
         # Filter events that are past
         now = timezone.now().date()
         self.objects["past_events"] = Event.objects.filter(date__lt=now).order_by('-date')
@@ -88,6 +92,7 @@ class PageObjects():
         return self.objects
 
     def get_event_detail_objects(self, event_id):
+        self.get_footer_objects()
         event = get_object_or_404(Event, id=event_id)
         now = timezone.now().date()
         # Fetch future events

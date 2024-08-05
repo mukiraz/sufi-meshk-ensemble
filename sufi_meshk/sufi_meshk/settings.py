@@ -33,7 +33,7 @@ DEBUG = os.getenv("DEBUG")
 
 #ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST")]
 
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
