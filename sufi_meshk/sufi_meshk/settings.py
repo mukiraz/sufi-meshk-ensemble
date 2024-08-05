@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from dotenv import load_dotenv, dotenv_values
 import os
 from pathlib import Path
-from website.storages import StaticStorage, MediaStorage
+from sufi_meshk.core.storages import StaticStorage, MediaStorage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
 INSTALLED_APPS = [
     'website',
+    'core',
     'django_ckeditor_5',
     'ckeditor_uploader',
     'modeltranslation',
