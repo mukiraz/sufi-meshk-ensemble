@@ -18,6 +18,7 @@ __pycache__/
 # Local environment
 .env
 sufi-meshk-env/
+venv/
 
 # Node.js
 node_modules/
