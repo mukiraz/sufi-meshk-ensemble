@@ -1,4 +1,5 @@
 import os
+import boto3
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -46,8 +47,22 @@ class PageObjects():
         return self.objects
     
     def get_gallery_view_objects(self):
-        media_root = os.path.join(settings.MEDIA_ROOT, 'gallery')
-        images = [f'/media//gallery/{file}' for file in os.listdir(media_root) if file.endswith(('jpg', 'jpeg', 'png', 'gif'))]
+        s3 = boto3.client('s3')
+        bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+        prefix = 'gallery/'  # Folder path in S3 bucket
+
+        # List all objects in the 'gallery' directory
+        result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+
+        # Generate the URLs for the images
+        images = []
+        for content in result.get('Contents', []):
+            key = content['Key']
+            if key.endswith(('jpg', 'jpeg', 'png', 'gif')):
+                url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{key}'
+                images.append(url)
+
+        # Store the URLs in self.objects
         print(images)
         self.objects["images"] = images
         self.objects["title"] = _("Media")
