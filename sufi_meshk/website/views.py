@@ -49,7 +49,7 @@ class PageObjects():
     def get_gallery_view_objects(self):
         s3 = boto3.client('s3')
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        prefix = 'gallery/'  # Folder path in S3 bucket
+        prefix = 'media/gallery/'  # Folder path in S3 bucket
 
         # List all objects in the 'gallery' directory
         result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
