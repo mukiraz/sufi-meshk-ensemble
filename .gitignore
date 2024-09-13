@@ -41,3 +41,5 @@ yarn-error.log*
 
 # Git
 .git/
+
+qr-code-generator.py
