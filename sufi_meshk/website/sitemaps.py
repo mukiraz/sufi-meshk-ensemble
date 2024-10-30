@@ -1,6 +1,5 @@
 # website/sitemaps.py
 from django.contrib.sitemaps import Sitemap
-from django.conf import settings
 from django.shortcuts import reverse
 from .models import BlogPost, Category, Tag, Event
 
@@ -15,7 +14,7 @@ class BlogPostSitemap(Sitemap):
         return obj.update_date
 
     def location(self, obj):
-        return f"{settings.SITE_URL}{reverse('blog_detail', args=[obj.slug])}"
+        return reverse('blog_detail', args=[obj.slug])
 
 
 class CategorySitemap(Sitemap):
@@ -26,7 +25,7 @@ class CategorySitemap(Sitemap):
         return Category.objects.all()
 
     def location(self, obj):
-        return f"{settings.SITE_URL}{reverse('blog_list_by_category', args=[obj.slug])}"
+        return reverse('blog_list_by_category', args=[obj.slug])
 
 
 class TagSitemap(Sitemap):
@@ -37,7 +36,7 @@ class TagSitemap(Sitemap):
         return Tag.objects.all()
 
     def location(self, obj):
-        return f"{settings.SITE_URL}{reverse('blog_list_by_tag', args=[obj.slug])}"
+        return reverse('blog_list_by_tag', args=[obj.slug])
 
 
 class EventSitemap(Sitemap):
@@ -51,7 +50,7 @@ class EventSitemap(Sitemap):
         return obj.date
 
     def location(self, obj):
-        return f"{settings.SITE_URL}{reverse('event_detail', args=[obj.id])}"
+        return reverse('event_detail', args=[obj.id])
     
 class StaticViewSitemap(Sitemap):
     priority = 0.5
@@ -61,7 +60,7 @@ class StaticViewSitemap(Sitemap):
         return ['index', 'about_us', 'media', 'updates']  # Önemli statik sayfaların URL isimleri
 
     def location(self, item):
-        return f"{settings.SITE_URL}{reverse(item)}"
+        return reverse(item)
 
 
 sitemaps = {

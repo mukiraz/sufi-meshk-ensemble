@@ -3,7 +3,7 @@
     
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/blog/deneme/</loc>
+                <loc>https://sufimeshk.org/en/blog/deneme/</loc>
                 <lastmod>2024-10-30</lastmod>
                 <changefreq>weekly</changefreq>
                 <priority>0.8</priority>
@@ -12,14 +12,14 @@
     
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/category/sufism/</loc>
+                <loc>https://sufimeshk.org/en/category/sufism/</loc>
                 
                 <changefreq>weekly</changefreq>
                 <priority>0.6</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/category/deneme/</loc>
+                <loc>https://sufimeshk.org/en/category/deneme/</loc>
                 
                 <changefreq>weekly</changefreq>
                 <priority>0.6</priority>
@@ -28,21 +28,21 @@
     
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/tag/mevlana/</loc>
+                <loc>https://sufimeshk.org/en/tag/mevlana/</loc>
                 
                 <changefreq>weekly</changefreq>
                 <priority>0.5</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/tag/rumi-poetry/</loc>
+                <loc>https://sufimeshk.org/en/tag/rumi-poetry/</loc>
                 
                 <changefreq>weekly</changefreq>
                 <priority>0.5</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/tag/meditation/</loc>
+                <loc>https://sufimeshk.org/en/tag/meditation/</loc>
                 
                 <changefreq>weekly</changefreq>
                 <priority>0.5</priority>
@@ -51,28 +51,28 @@
     
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/events/1/</loc>
+                <loc>https://sufimeshk.org/en/events/1/</loc>
                 <lastmod>2021-12-12</lastmod>
                 <changefreq>daily</changefreq>
                 <priority>0.7</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/events/2/</loc>
+                <loc>https://sufimeshk.org/en/events/2/</loc>
                 <lastmod>2021-12-16</lastmod>
                 <changefreq>daily</changefreq>
                 <priority>0.7</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/events/3/</loc>
+                <loc>https://sufimeshk.org/en/events/3/</loc>
                 <lastmod>2024-08-31</lastmod>
                 <changefreq>daily</changefreq>
                 <priority>0.7</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/events/4/</loc>
+                <loc>https://sufimeshk.org/en/events/4/</loc>
                 <lastmod>2024-10-05</lastmod>
                 <changefreq>daily</changefreq>
                 <priority>0.7</priority>
@@ -81,28 +81,28 @@
     
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/</loc>
+                <loc>https://sufimeshk.org/en/</loc>
                 
                 <changefreq>monthly</changefreq>
                 <priority>0.5</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/about-us</loc>
+                <loc>https://sufimeshk.org/en/about-us</loc>
                 
                 <changefreq>monthly</changefreq>
                 <priority>0.5</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/media</loc>
+                <loc>https://sufimeshk.org/en/media</loc>
                 
                 <changefreq>monthly</changefreq>
                 <priority>0.5</priority>
             </url>
         
             <url>
-                <loc>https://example.comhttps://sufimeshk.org/en/updates/</loc>
+                <loc>https://sufimeshk.org/en/updates/</loc>
                 
                 <changefreq>monthly</changefreq>
                 <priority>0.5</priority>

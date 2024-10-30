@@ -11,8 +11,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Generate sitemap content
         sitemap_content = render_to_string('sitemap_template.xml', {
-            'sitemaps': sitemaps,
+            'sitemaps': sitemaps
         })
+
         
         # Save to local static directory
         sitemap_path = os.path.join(settings.BASE_DIR, 'static', 'sitemap.xml')
