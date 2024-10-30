@@ -1,7 +1,17 @@
 # your_app/urls.py
 from django.urls import path
 from . import views
+from django.contrib.sitemaps.views import sitemap
 from .views import BlogListByCategoryView, BlogListByTagView, BlogSearchView, BlogDetailView
+from .sitemaps import BlogPostSitemap, CategorySitemap, TagSitemap, EventSitemap, StaticViewSitemap
+
+sitemaps = {
+    'blogposts': BlogPostSitemap,
+    'categories': CategorySitemap,
+    'tags': TagSitemap,
+    'events': EventSitemap,
+    'static':StaticViewSitemap
+}
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -15,5 +25,6 @@ urlpatterns = [
     path('category/<slug:slug>/', BlogListByCategoryView.as_view(), name='blog_list_by_category'),
     path('tag/<slug:slug>/', BlogListByTagView.as_view(), name='blog_list_by_tag'),
     path('search/', BlogSearchView.as_view(), name='blog_search'),
-    path('blog/<slug:slug>/', BlogDetailView.as_view(), name='blog_detail')
+    path('blog/<slug:slug>/', BlogDetailView.as_view(), name='blog_detail'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]

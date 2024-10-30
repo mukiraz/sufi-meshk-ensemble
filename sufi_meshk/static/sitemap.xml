@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+        
+            <url>
+                <loc>https://example.com/en/blog/deneme/</loc>
+                <lastmod>2024-10-30</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>0.8</priority>
+            </url>
+        
+    
+        
+            <url>
+                <loc>https://example.com/en/category/sufism/</loc>
+                
+                <changefreq>weekly</changefreq>
+                <priority>0.6</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/category/deneme/</loc>
+                
+                <changefreq>weekly</changefreq>
+                <priority>0.6</priority>
+            </url>
+        
+    
+        
+            <url>
+                <loc>https://example.com/en/tag/mevlana/</loc>
+                
+                <changefreq>weekly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/tag/rumi-poetry/</loc>
+                
+                <changefreq>weekly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/tag/meditation/</loc>
+                
+                <changefreq>weekly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+    
+        
+            <url>
+                <loc>https://example.com/en/events/1/</loc>
+                <lastmod>2021-12-12</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.7</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/events/2/</loc>
+                <lastmod>2021-12-16</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.7</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/events/3/</loc>
+                <lastmod>2024-08-31</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.7</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/events/4/</loc>
+                <lastmod>2024-10-05</lastmod>
+                <changefreq>daily</changefreq>
+                <priority>0.7</priority>
+            </url>
+        
+    
+        
+            <url>
+                <loc>https://example.com/en/</loc>
+                
+                <changefreq>monthly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/about-us</loc>
+                
+                <changefreq>monthly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/media</loc>
+                
+                <changefreq>monthly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+            <url>
+                <loc>https://example.com/en/updates/</loc>
+                
+                <changefreq>monthly</changefreq>
+                <priority>0.5</priority>
+            </url>
+        
+    
+</urlset>

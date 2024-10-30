@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'    
+    'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+    'django.contrib.sites'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +88,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sufi_meshk.wsgi.application'
 
+SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
