@@ -10,7 +10,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Generate sitemap content
-        sitemap_content = render_to_string('sitemap_template.xml', {'sitemaps': sitemaps})
+        sitemap_content = render_to_string('sitemap_template.xml', {
+            'sitemaps': sitemaps,
+        })
         
         # Save to local static directory
         sitemap_path = os.path.join(settings.BASE_DIR, 'static', 'sitemap.xml')
@@ -43,4 +45,3 @@ class Command(BaseCommand):
             ContentType='application/xml',
             CacheControl=settings.AWS_S3_OBJECT_PARAMETERS['CacheControl']
         )
-
