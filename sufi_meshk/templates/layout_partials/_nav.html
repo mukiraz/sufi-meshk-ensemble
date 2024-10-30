@@ -26,6 +26,16 @@
               <li><a class="dropdown-item" href="{% url 'past_events' %}">{% trans "Old Events" %}</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% trans "Blog" %}
+            </a>
+            <ul class="dropdown-menu">
+              {% for category in categories %}
+                  <li><a class="dropdown-item" href="{% url 'blog_list_by_category' category.slug %}">{{ category.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'media' %}">{% trans "Media" %}</a>
           </li>
@@ -34,7 +44,7 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {% trans "Language" %}
+              <i class="fa-solid fa-language"></i>
             </a>
             <ul class="dropdown-menu">
               {% get_current_language as LANGUAGE_CODE %}

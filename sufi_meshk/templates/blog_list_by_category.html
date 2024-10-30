@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    {% include "_metatags_partials.html" %}
+{% endblock %}
+
+{% block main %}
+  <div class="container mt-5">
+    <div class="row my-4">
+      <div class="col">
+        <h2 class="text-center">
+          {% if category %}
+            {{ category.name }} {% translate 'Blogs' %}
+          {% elif tag %}
+            {{ tag.name }} {% translate 'Blogs' %}
+          {% elif query %}
+            {% translate 'Search Results for' %} "{{ query }}"
+          {% else %}
+            {{ blog.title }}
+          {% endif %}
+        </h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Blog veya Blog Listesi -->
+      <div class="col-lg-8">
+        {% if blog %}
+          <!-- Tek bir blog gösterimi -->
+          <div class="card mb-4">
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if blog.featured_image %}
+                  <img src="{{ blog.featured_image.url }}" class="img-fluid rounded-start" alt="{{ blog.title }}" style="object-fit: cover;" />
+                {% endif %}
+              </div>
+              <div class="col-md-8 d-flex flex-column justify-content-center p-3">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <p class="card-text">{{ blog.content|safe }}</p>
+                <p class="card-text"><strong>{% translate 'Author' %}:</strong> {{ blog.meta_author }}</p>
+                <p class="card-text"><strong>{% translate 'Published on' %}:</strong> {{ blog.create_date }}</p>
+
+                {% if blog.tags.exists %}
+                  <p><strong>{% translate 'Tags' %}:</strong>
+                    {% for tag in blog.tags.all %}
+                      <a href="{% url 'blog_list_by_tag' tag.slug %}" class="badge bg-secondary text-decoration-none m-1">{{ tag.name }}</a>
+                    {% endfor %}
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <!-- Blog listesi gösterimi -->
+          {% for blog in blogs %}
+            <div class="card mb-4">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  {% if blog.featured_image %}
+                    <img src="{{ blog.featured_image.url }}" class="img-fluid rounded-start" alt="{{ blog.title }}" style="object-fit: cover;" />
+                  {% endif %}
+                </div>
+                <div class="col-md-4 d-flex flex-column justify-content-center p-3">
+                  <h5 class="card-title">{{ blog.title }}</h5>
+                  <p class="card-text">{{ blog.short_description|truncatewords:30 }}</p>
+                </div>
+                <div class="col-md-4 d-flex flex-column justify-content-center align-items-start p-3">
+                  <p class="mb-1 text-muted" style="font-size: 0.9em;">
+                    <strong>{% translate 'Author' %}:</strong> {{ blog.meta_author }}
+                  </p>
+                  <p class="mb-1 text-muted" style="font-size: 0.9em;">
+                    <strong>{% translate 'Published on' %}:</strong> {{ blog.create_date }}
+                  </p>
+                  {% if blog.tags.exists %}
+                    <p class="mb-1">
+                      <strong>{% translate 'Tags' %}:</strong>
+                      {% for tag in blog.tags.all %}
+                        <a href="{% url 'blog_list_by_tag' tag.slug %}" class="badge bg-secondary text-decoration-none m-1">{{ tag.name }}</a>
+                      {% endfor %}
+                    </p>
+                  {% endif %}
+                  <a href="{% url 'blog_detail' blog.slug %}" class="btn btn-primary btn-sm mt-2">{% translate 'Read More' %}</a>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <p>{% translate 'No blogs found in this category or tag.' %}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Sağ panel - Recent Posts ve Tag Cloud -->
+      <div class="col-lg-4">
+        <!-- Recent Posts -->
+        <div class="mb-4">
+          <h4 class="mb-3">{% translate 'Recent Posts' %}</h4>
+          <div class="list-group">
+            {% for recent_blog in recent_blogs %}
+              <div class="list-group-item d-flex align-items-center">
+                {% if recent_blog.featured_image %}
+                  <img src="{{ recent_blog.featured_image.url }}" class="me-3 rounded" alt="{{ recent_blog.title }}" style="width: 60px; height: 60px; object-fit: cover;" />
+                {% endif %}
+                <div>
+                  <h6 class="mb-1"><a href="{% url 'blog_detail' recent_blog.slug %}" class="text-decoration-none text-dark">{{ recent_blog.title }}</a></h6>
+                  <small class="text-muted">{{ recent_blog.create_date }}</small>
+                </div>
+              </div>
+            {% empty %}
+              <p>{% translate 'No recent blogs found.' %}</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Tag Cloud -->
+        <div class="mb-4 tag-cloud">
+          <h4>{% translate 'Tag Cloud' %}</h4>
+          <div>
+            {% for tag in tags %}
+              <a href="{% url 'blog_list_by_tag' tag.slug %}" class="badge bg-info text-decoration-none m-1">{{ tag.name }}</a>
+            {% empty %}
+              <p>{% translate 'No tags available.' %}</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

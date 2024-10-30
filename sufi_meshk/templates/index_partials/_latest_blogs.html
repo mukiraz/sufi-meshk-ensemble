@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div class="container">
+    <div class="row mb-5">
+      <div class="col">
+        <h2 class="text-center">{% translate 'Latest Blogs' %}</h2>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center g-4">
+      {% for latest_blog in latest_blogs %}
+        <div class="d-flex justify-content-center mb-4" style="flex: 0 0 33%; max-width: 33%;">
+          <div class="card h-100" style="width: 100%; max-width: 300px;">
+            <img src="{{ latest_blog.featured_image.url }}" class="card-img-top" alt="{{ latest_blog.title }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ latest_blog.title }}</h5>
+              <p class="card-text">{{ latest_blog.short_description}}</p>
+              <a href="{% url 'blog_detail' latest_blog.slug %}" class="btn btn-primary">{% translate 'See Details' %}</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        
+      
+      {% endfor %}
+    </div>
+    <hr class="mt-5" />
+  </div>

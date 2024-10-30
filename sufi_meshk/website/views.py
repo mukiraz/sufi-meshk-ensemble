@@ -4,139 +4,187 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 from django.conf import settings
-from .models import SocialMediaLink, GroupMember, FAQ, Update, Event
+from django.views.generic import ListView, DetailView
+from django.db.models import Q
+from .models import GroupMember, FAQ, Update, Event, BlogPost, Category, Tag
 
 
-# Create your views here.
-class PageObjects():
-    def __init__(self):
-        self.objects = dict()
-
-    def get_header_objects(self):
-        pass
-
-    def get_future_events(self):
-        now = timezone.now().date()
-        return Event.objects.filter(date__gte=now).order_by('date')
-
-
-    def get_footer_objects(self):
-        social_links = SocialMediaLink.objects.all()
-        self.objects['social_links'] = social_links
-
-    def get_index_page_objects(self):
-        faqs = FAQ.objects.all()
-        self.get_footer_objects()
-        self.objects["faqs"] = faqs
-        self.objects["title"] = _('Home')
-        self.objects["future_events"] = self.get_future_events()
-        return self.objects
-    
-    def get_about_us_objects(self):
-        self.get_footer_objects()
-        group_members = GroupMember.objects.all()
-        self.objects['group_members'] = group_members
-        self.objects["title"] = _('About Us')
-        return self.objects
-    
-    def get_group_member(self, id):
-        self.get_footer_objects()
-        member = get_object_or_404(GroupMember, id=id)
-        self.objects['member'] = member
-        self.objects["title"] = f"{member.name} {member.surname}"
-        return self.objects
-    
-    def get_gallery_view_objects(self):
-        self.get_footer_objects()
-        s3 = boto3.client('s3')
-        bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        prefix = 'media/gallery/'  # Folder path in S3 bucket
-
-        # List all objects in the 'gallery' directory
-        result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-
-        # Generate the URLs for the images
-        images = []
-        for content in result.get('Contents', []):
-            key = content['Key']
-            if key.endswith(('jpg', 'jpeg', 'png', 'gif')):
-                url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{key}'
-                images.append(url)
-
-        # Store the URLs in self.objects
-        print(images)
-        self.objects["images"] = images
-        self.objects["title"] = _("Media")
-        return self.objects
-
-    def get_updates_view_objects(self):
-        self.get_footer_objects()
-        updates = Update.objects.filter(is_active=True)
-        self.objects["updates"] = updates
-        self.objects["title"] = _("Updates")
-        return self.objects
-
-    def get_future_events_view(self):
-        self.get_footer_objects()
-        # Filter events that are upcoming or ongoing
-        self.objects["future_events"] = self.get_future_events()
-        self.objects["title"] = _("Future Events")
-        return self.objects
-
-    def get_past_events_view(self):
-        self.get_footer_objects()
-        # Filter events that are past
-        now = timezone.now().date()
-        self.objects["past_events"] = Event.objects.filter(date__lt=now).order_by('-date')
-        self.objects["title"] = _("Old Events")
-        return self.objects
-
-    def get_event_detail_objects(self, event_id):
-        self.get_footer_objects()
-        event = get_object_or_404(Event, id=event_id)
-        now = timezone.now().date()
-        # Fetch future events
-        future_events = Event.objects.filter(date__gte=now).exclude(id=event.id).order_by('date')
-        # Fetch last 4 past events
-        past_events = Event.objects.filter(date__lt=now).exclude(id=event.id).order_by('-date')[:4]
-        self.objects['event'] = event
-        self.objects['future_events'] = future_events
-        self.objects['past_events'] = past_events
-        self.objects["title"] = event.event_name
-        return self.objects
-
+# Views
 
 def index(request):
-    page_objects = PageObjects().get_index_page_objects()
-    return render(request, 'index.html', page_objects)
+    faqs = FAQ.objects.all()
+    future_events = Event.objects.filter(date__gte=timezone.now().date()).order_by('date')
+    context = {
+        "faqs": faqs,
+        "future_events": future_events,
+        "title": _('Home')
+    }
+    return render(request, 'index.html', context)
 
 def about_us(request):
-    page_objects = PageObjects().get_about_us_objects()
-    return render(request, 'about-us.html', page_objects)
+    group_members = GroupMember.objects.all()
+    context = {
+        'group_members': group_members,
+        "title": _('About Us')
+    }
+    return render(request, 'about-us.html', context)
 
 def group_member_detail(request, id):
-    page_objects = PageObjects().get_group_member(id)
-    return render(request, 'group-member.html', page_objects)
+    member = get_object_or_404(GroupMember, id=id)
+    context = {
+        'member': member,
+        "title": f"{member.name} {member.surname}"
+    }
+    return render(request, 'group-member.html', context)
 
 def gallery_view(request):
-    page_objects = PageObjects().get_gallery_view_objects()
-    return render(request, 'media.html', page_objects)
+    s3 = boto3.client('s3')
+    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+    prefix = 'media/gallery/'  # S3 bucket içindeki klasör yolu
+
+    # 'gallery' klasöründeki tüm nesneleri listele
+    result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
+
+    # Görüntülerin URL'lerini oluştur
+    images = []
+    for content in result.get('Contents', []):
+        key = content['Key']
+        if key.endswith(('jpg', 'jpeg', 'png', 'gif')):
+            url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{key}'
+            images.append(url)
+
+    context = {
+        "images": images,
+        "title": _("Media")
+    }
+    return render(request, 'media.html', context)
 
 def updates_view(request):
-    page_objects = PageObjects().get_updates_view_objects()
-    return render(request, 'updates.html', page_objects)
-
+    updates = Update.objects.filter(is_active=True)
+    context = {
+        "updates": updates,
+        "title": _("Updates")
+    }
+    return render(request, 'updates.html', context)
 
 def future_events_view(request):
-    page_objects = PageObjects().get_future_events_view()
-    return render(request, 'future_events.html', page_objects)
+    future_events = Event.objects.filter(date__gte=timezone.now().date()).order_by('date')
+    context = {
+        "future_events": future_events,
+        "title": _("Future Events")
+    }
+    return render(request, 'future_events.html', context)
 
 def past_events_view(request):
-    page_objects = PageObjects().get_past_events_view()
-    return render(request, 'past_events.html', page_objects)
-
+    past_events = Event.objects.filter(date__lt=timezone.now().date()).order_by('-date')
+    context = {
+        "past_events": past_events,
+        "title": _("Old Events")
+    }
+    return render(request, 'past_events.html', context)
 
 def event_detail_view(request, event_id):
-    page_objects = PageObjects().get_event_detail_objects(event_id)
-    return render(request, 'event-detail.html', page_objects)
+    event = get_object_or_404(Event, id=event_id)
+    now = timezone.now().date()
+    future_events = Event.objects.filter(date__gte=now).exclude(id=event_id).order_by('date')
+    past_events = Event.objects.filter(date__lt=now).exclude(id=event_id).order_by('-date')[:4]
+    
+    context = {
+        'event': event,
+        'future_events': future_events,
+        'past_events': past_events,
+        "title": event.event_name
+    }
+    return render(request, 'event-detail.html', context)
 
+class BlogListByCategoryView(ListView):
+    model = BlogPost
+    template_name = 'blog_list_by_category.html'
+    context_object_name = 'blogs'
+    paginate_by = 10  # Sayfa başına blog sayısını belirleyin (opsiyonel)
+
+    def get_queryset(self):
+        category_slug = self.kwargs['slug']
+        category = get_object_or_404(Category, slug=category_slug)
+        return BlogPost.objects.filter(category=category, status='published').order_by('-create_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_slug = self.kwargs['slug']
+        category = get_object_or_404(Category, slug=category_slug)
+        
+        # İlgili kategoriye ait blogları hariç tutarak diğer blogları recent_blogs olarak ekleyelim
+        context['category'] = category
+        context['recent_blogs'] = BlogPost.objects.filter(status='published').exclude(category=category).order_by('-create_date')[:3]
+        
+        # Tüm etiketleri alarak tag cloud için context'e ekleyelim
+        context['tags'] = Tag.objects.all()
+        context['title'] = f"{category.name} { _('Blogs') }"  # Dinamik başlık
+        return context
+    
+class BlogListByTagView(ListView):
+    model = BlogPost
+    template_name = 'blog_list_by_category.html'  # Aynı template'i kullanıyoruz
+    context_object_name = 'blogs'
+    paginate_by = 10  # Sayfa başına blog sayısını belirleyin (opsiyonel)
+
+    def get_queryset(self):
+        tag_slug = self.kwargs['slug']
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        return BlogPost.objects.filter(tags=tag, status='published').order_by('-create_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tag_slug = self.kwargs['slug']
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        
+        # İlgili etikete ait blogları hariç tutarak diğer blogları recent_blogs olarak ekleyelim
+        context['tag'] = tag
+        context['recent_blogs'] = BlogPost.objects.filter(status='published').exclude(tags=tag).order_by('-create_date')[:3]
+        
+        # Tüm etiketleri alarak tag cloud için context'e ekleyelim
+        context['tags'] = Tag.objects.all()
+        context['title'] = f"{tag.name} { _('Tagged Blogs') }"  # Dinamik başlık
+        
+        return context
+
+class BlogSearchView(ListView):
+    model = BlogPost
+    template_name = 'blog_list_by_category.html'  # Aynı template'i kullanıyoruz
+    context_object_name = 'blogs'
+    paginate_by = 10  # Sayfa başına sonuç sayısını belirleyin
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        print(query)
+        if query:
+            return BlogPost.objects.filter(
+                (Q(title__icontains=query) | 
+                Q(content__icontains=query) | 
+                Q(short_description__icontains=query)) &
+                Q(status='published')
+            ).order_by('-create_date')
+        else:
+            return BlogPost.objects.none()
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get('q')
+        context['query'] = self.request.GET.get('q')
+        context['recent_blogs'] = BlogPost.objects.filter(status='published').order_by('-create_date')[:3]
+        context['tags'] = Tag.objects.all()
+        context['title'] = f"{ _('Search results for') } '{query}'" if query else _('Search Blogs')  # Dinamik başlık
+        return context
+
+class BlogDetailView(DetailView):
+    model = BlogPost
+    template_name = 'blog_detail.html'  # Aynı template'i kullanıyoruz
+    context_object_name = 'blog'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recent_blogs'] = BlogPost.objects.filter(status='published').exclude(id=self.object.id).order_by('-create_date')[:3]
+        context['tags'] = Tag.objects.all()
+        context['title'] = self.object.title
+        return context

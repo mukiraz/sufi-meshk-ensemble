@@ -7,7 +7,9 @@
         <h2 class="text-center mb-5">SUFI MESHK ENSEMBLE</h2>
         <div class="d-flex justify-content-center mt-3 social-media">
           {% for social_link in social_links %}
-            <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-2xl"></i></a>
+            {% if not social_link.author_specific %}
+              <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-2xl"></i></a>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -27,14 +29,25 @@
       </div>
       <div class="col-md-4 d-flex justify-content-center align-items-center useful-links">
         <ul class="social-media">
-            <li><a href="{% url 'about_us' %}">{% translate "About Us" %}</a></li>
-            <li><a href="{% url 'index' %}#faq-section">{% translate "FAQ" %}</a></li>
-            <li><a href="{% url 'future_events' %}">{% translate "Future Events" %}</a></li>
-            <li><a href="{% url 'past_events' %}">{% translate "Old Events" %}</a></li>
-            <li><a href="{% url 'media' %}">{% translate "Media" %}</a></li>
-            <li><a href="{% url 'updates' %}">{% translate "Updates" %}</a></li>
+          <li>
+            <a href="{% url 'about_us' %}">{% translate 'About Us' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'index' %}#faq-section">{% translate 'FAQ' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'future_events' %}">{% translate 'Future Events' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'past_events' %}">{% translate 'Old Events' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'media' %}">{% translate 'Media' %}</a>
+          </li>
+          <li>
+            <a href="{% url 'updates' %}">{% translate 'Updates' %}</a>
+          </li>
         </ul>
-        
       </div>
     </div>
   </div>

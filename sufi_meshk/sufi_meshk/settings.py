@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1")
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 
@@ -78,7 +78,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-            ],
+                'website.context_processors.common_page_objects'
+                ],
         },
     },
 ]

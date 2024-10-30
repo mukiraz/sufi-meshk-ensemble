@@ -1,0 +1,128 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    <!-- SEO Meta Tags -->
+    <meta name="title" content="{{ blog.meta_title|default:blog.title }}">
+    <meta name="description" content="{{ blog.meta_description|default:blog.short_description }}">
+    <meta name="keywords" content="{{ blog.meta_keywords }}">
+
+    <!-- Author -->
+    <meta name="author" content="{{ blog.meta_author|default:blog.author.name }}">
+
+    <!-- Open Graph Meta Tags for social media sharing -->
+    <meta property="og:title" content="{{ blog.og_title|default:blog.meta_title }}">
+    <meta property="og:description" content="{{ blog.og_description|default:blog.meta_description }}">
+    <meta property="og:image" content="{% if blog.og_image %}{{ blog.og_image.url }}{% elif blog.featured_image %}{{ blog.featured_image.url }}{% endif %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="{{ blog.twitter_card_type|default:'summary_large_image' }}">
+    <meta name="twitter:title" content="{{ blog.meta_title|default:blog.title }}">
+    <meta name="twitter:description" content="{{ blog.meta_description|default:blog.short_description }}">
+    <meta name="twitter:image" content="{% if blog.og_image %}{{ blog.og_image.url }}{% elif blog.featured_image %}{{ blog.featured_image.url }}{% endif %}">
+{% endblock %}
+
+
+{% block main %}
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Ana içerik alanı -->
+      <div class="col-lg-8">
+        <!-- 1. Blog Title -->
+        <h1 class="mb-3">{{ blog.title }}</h1>
+
+        <!-- 2. Blog Metadata -->
+        <div class="mb-4 text-muted">
+          <span class="me-3"><i class="far fa-calendar-alt"></i> {{ blog.create_date }}</span>
+          <span><i class="far fa-user"></i> {{ blog.meta_author }}</span>
+        </div>
+
+        <!-- 3. Featured Image -->
+        {% if blog.featured_image %}
+          <img src="{{ blog.featured_image.url }}" alt="{{ blog.title }}" class="img-fluid mb-4 rounded" />
+        {% endif %}
+
+        <!-- 4. Blog Text -->
+        <div class="blog-content">{{ blog.content|safe }}</div>
+      </div>
+
+      <!-- Sağ panel -->
+      <div class="col-lg-4">
+        <!-- 5. Search Box -->
+        <div class="mb-4">
+          <form method="get" action="{% url 'blog_search' %}">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="{% translate 'Search blogs...' %}" aria-label="Search blogs" />
+              <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 6. Author Information -->
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <!-- Author's Image -->
+            <img src="{{ blog.author.photo.url }}" alt="Author Image" class="rounded-circle mb-3" style="width: 100px; height: 100px;" />
+
+            <!-- Author's Name -->
+            <h5 class="card-title">{{ blog.author.name }} {{ blog.author.surname }}</h5>
+
+            <!-- Author's Position -->
+            <p class="card-text">
+              <strong>{{ blog.author.position }}</strong>
+            </p>
+
+            <!-- Author's Short Description -->
+            <p class="card-text">{{ blog.author.short_description }}</p>
+
+            <!-- Social Media Links -->
+            <div class="social-icons">
+              {% for social_link in blog.author.social_media_links.all %}
+                <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-lg"></i></a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Recent Posts -->
+        <div class="mb-4">
+          <h4 class="mb-3">{% translate 'Recent Posts' %}</h4>
+          <div class="list-group">
+            {% for recent_blog in recent_blogs %}
+              <a href="{% url 'blog_detail' recent_blog.slug %}" class="list-group-item list-group-item-action d-flex align-items-center">
+                {% if recent_blog.featured_image %}
+                  <img src="{{ recent_blog.featured_image.url }}" class="me-3 rounded" alt="{{ recent_blog.title }}" style="width: 60px; height: 60px; object-fit: cover;" />
+                {% endif %}
+                <div>
+                  <h6 class="mb-1">{{ recent_blog.title }}</h6>
+                  <small class="text-muted">{{ recent_blog.create_date }}</small>
+                </div>
+              </a>
+            {% empty %}
+              <p>
+                {% translate 'No recent blogs found.' %}
+              </p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- 8. Tag Cloud -->
+        <div class="mb-4 tag-cloud">
+          <h4>{% translate 'Tag Cloud' %}</h4>
+          <div>
+            {% for tag in tags %}
+              <a href="{% url 'blog_list_by_tag' tag.slug %}" class="badge bg-info text-decoration-none m-1">{{ tag.name }}</a>
+            {% empty %}
+              <p>
+                {% translate 'No tags available.' %}
+              </p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

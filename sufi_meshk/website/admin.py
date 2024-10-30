@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.db import models
-from.models import SocialMediaLink, GroupMember, FAQ, Update, Event, EventImage
+from.models import SocialMediaLink, GroupMember, FAQ, Update, Event, EventImage, Category, Tag, BlogPost, Author
 from django_ckeditor_5.widgets import CKEditor5Widget
+from modeltranslation.admin import TranslationAdmin
 
 class GroupMemberAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -25,3 +26,18 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ('status', 'date')
 
 admin.site.register(Event, EventAdmin)
+
+admin.site.register(Category)
+admin.site.register(Tag)
+
+class BlogPostAdmin(TranslationAdmin):  # TranslationAdmin kullanıyoruz
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget},
+    }
+    list_display = ('title', 'author', 'status', 'create_date')
+    search_fields = ('title', 'content')
+    list_filter = ('status', 'create_date')
+
+admin.site.register(BlogPost, BlogPostAdmin)
+
+admin.site.register(Author)

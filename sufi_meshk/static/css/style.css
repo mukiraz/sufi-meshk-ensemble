@@ -11941,4 +11941,14 @@ textarea.form-control-lg {
   height: 100%;
 }
 
+.tag-cloud a {
+  transition: all 0.3s ease;
+}
+
+.tag-cloud a:hover {
+  font-size: 1.05em; /* Biraz büyütmek için */
+  color: #F5F5F5;
+  background-color: #4CAF50;
+}
+
 /*# sourceMappingURL=style.css.map */
