@@ -6,18 +6,19 @@
         <h2 class="text-center">{% translate 'Future Events' %}</h2>
       </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-center g-4">
+    <div class="row d-flex justify-content-center">
       {% for event in future_events %}
-        <div class="d-flex justify-content-center mb-4" style="flex: 0 0 33%; max-width: 33%;">
-          <div class="card h-100" style="width: 100%; max-width: 300px;">
-            <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
-            <div class="card-body">
-              <h5 class="card-title">{{ event.event_name }}</h5>
-              <p class="card-text">{{ event.description|truncatewords:20 }}</p>
-              <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">{% translate 'See Details' %}</a>
-            </div>
+        <div class="col-md-4 mb-3 d-flex justify-content-center">
+          <div class="card" style="width: 100%;">
+              <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
+              <div class="card-body text-center">
+                  <h5 class="card-title">{{ event.event_name }}</h5>
+                  <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+                  <a href="{% url 'event_detail' event.id %}" class="btn btn-success text-white">{% translate 'See Details' %}</a>
+                  <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
+              </div>
           </div>
-        </div>
+      </div>
       {% empty %}
         <div class="col">
           <p class="text-muted text-center text-warning">

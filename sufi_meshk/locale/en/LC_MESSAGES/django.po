@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-03 09:19+0300\n"
+"POT-Creation-Date: 2024-10-31 09:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,49 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\about-us.html:7 .\templates\about-us.html:12
-#: .\templates\about-us.html:18
+#: .\templates\_metatags_partials.html:3 .\templates\_metatags_partials.html:8
+#: .\templates\_metatags_partials.html:14
 msgid ""
 "Sufi Meshk Ensemble - Authentic Classical Turkish Music and Mevlevi Rites"
 msgstr ""
 
-#: .\templates\about-us.html:8
+#: .\templates\_metatags_partials.html:4
 msgid ""
 "Experience the rich traditions of Classical Turkish Music and Mevlevi Rites "
 "with the Sufi Meshk Ensemble. Inspired by Mevlana Jalaluddin Rumi, our "
 "performances celebrate love, tolerance, and spirituality."
 msgstr ""
 
-#: .\templates\about-us.html:9
+#: .\templates\_metatags_partials.html:5
 msgid ""
 "Sufi Meshk Ensemble, Classical Turkish Music, Mevlevi Rites, Mevlana "
 "Jalaluddin Rumi, Sufi music, Turkish music, spiritual music, Sufi mysticism, "
 "love, tolerance, spirituality, music ensemble"
 msgstr ""
 
-#: .\templates\about-us.html:10
+#: .\templates\_metatags_partials.html:6
 msgid "Sufi Meshk Ensemble"
 msgstr ""
 
-#: .\templates\about-us.html:13
+#: .\templates\_metatags_partials.html:9
 msgid ""
 "Join the Sufi Meshk Ensemble in celebrating the timeless beauty of Sufi "
 "music, deeply rooted in the traditions of Classical Turkish Music and "
 "Mevlevi Rites."
 msgstr ""
 
-#: .\templates\about-us.html:19
+#: .\templates\_metatags_partials.html:15
 msgid ""
 "Experience the profound spiritual and cultural heritage of Sufi music with "
 "the Sufi Meshk Ensemble."
 msgstr ""
 
-#: .\templates\about-us.html:31
+#: .\templates\about-us.html:16
 #: .\templates\index_partials\_music_example.html:5
 msgid "The Essence of Our Music"
 msgstr ""
 
-#: .\templates\about-us.html:34
+#: .\templates\about-us.html:19
 #: .\templates\index_partials\_music_example.html:9
 msgid ""
 "The essence of our music lies in its profound spiritual and cultural "
@@ -71,7 +71,7 @@ msgid ""
 "other."
 msgstr ""
 
-#: .\templates\about-us.html:35
+#: .\templates\about-us.html:20
 #: .\templates\index_partials\_music_example.html:12
 msgid ""
 "Our repertoire is deeply influenced by the teachings of Mevlana Jalaluddin "
@@ -81,7 +81,7 @@ msgid ""
 "encouraging a state of inner peace and reflection."
 msgstr ""
 
-#: .\templates\about-us.html:36
+#: .\templates\about-us.html:21
 #: .\templates\index_partials\_music_example.html:15
 msgid ""
 "At Sufi Meshk Ensemble, we strive to preserve the authenticity and purity of "
@@ -90,35 +90,35 @@ msgid ""
 "audience to experience its transformative power."
 msgstr ""
 
-#: .\templates\about-us.html:69 .\templates\event-detail.html:127
+#: .\templates\about-us.html:54 .\templates\event-detail.html:127
 msgid "Previous"
 msgstr ""
 
-#: .\templates\about-us.html:73 .\templates\event-detail.html:131
+#: .\templates\about-us.html:58 .\templates\event-detail.html:131
 msgid "Next"
 msgstr ""
 
-#: .\templates\about-us.html:82
+#: .\templates\about-us.html:67
 msgid "Video"
 msgstr ""
 
-#: .\templates\about-us.html:100
+#: .\templates\about-us.html:85
 msgid "Group Members"
 msgstr ""
 
-#: .\templates\about-us.html:110
+#: .\templates\about-us.html:95
 msgid "Instrument/Duty:"
 msgstr ""
 
-#: .\templates\about-us.html:115 .\templates\index_partials\_about_us.html:17
-#: .\templates\updates.html:24
+#: .\templates\about-us.html:100 .\templates\blog_list_by_category.html:84
+#: .\templates\index_partials\_about_us.html:17 .\templates\updates.html:29
 msgid "Read More"
 msgstr ""
 
 #: .\templates\aboutus_partials\_banner.html:6
 #: .\templates\index_partials\_about_us.html:6
-#: .\templates\layout_partials\_footer.html:30
-#: .\templates\layout_partials\_nav.html:15 .\website\views.py:38
+#: .\templates\layout_partials\_footer.html:33
+#: .\templates\layout_partials\_nav.html:15 .\website\views.py:28
 msgid "About Us"
 msgstr ""
 
@@ -160,12 +160,60 @@ msgid ""
 "transcendent melodies to contemporary audiences."
 msgstr ""
 
+#: .\templates\blog_detail.html:58
+msgid "Search blogs..."
+msgstr ""
+
+#: .\templates\blog_detail.html:92 .\templates\blog_list_by_category.html:98
+msgid "Recent Posts"
+msgstr ""
+
+#: .\templates\blog_detail.html:106 .\templates\blog_list_by_category.html:111
+msgid "No recent blogs found."
+msgstr ""
+
+#: .\templates\blog_detail.html:114 .\templates\blog_list_by_category.html:118
+msgid "Tag Cloud"
+msgstr ""
+
+#: .\templates\blog_detail.html:120 .\templates\blog_list_by_category.html:123
+msgid "No tags available."
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:15
+#: .\templates\blog_list_by_category.html:17
+msgid "Blogs"
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:19
+msgid "Search Results for"
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:42
+#: .\templates\blog_list_by_category.html:71
+msgid "Author"
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:43
+#: .\templates\blog_list_by_category.html:74
+msgid "Published on"
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:46
+#: .\templates\blog_list_by_category.html:78
+msgid "Tags"
+msgstr ""
+
+#: .\templates\blog_list_by_category.html:89
+msgid "No blogs found in this category or tag."
+msgstr ""
+
 #: .\templates\event-detail.html:29
 msgid "Event Details"
 msgstr ""
 
-#: .\templates\event-detail.html:41 .\templates\future_events.html:23
-#: .\templates\past_events.html:23
+#: .\templates\event-detail.html:41 .\templates\future_events.html:29
+#: .\templates\past_events.html:28
 msgid "Date"
 msgstr ""
 
@@ -173,8 +221,8 @@ msgstr ""
 msgid "End Date"
 msgstr ""
 
-#: .\templates\event-detail.html:49 .\templates\future_events.html:24
-#: .\templates\past_events.html:24
+#: .\templates\event-detail.html:49 .\templates\future_events.html:30
+#: .\templates\past_events.html:29
 msgid "Place"
 msgstr ""
 
@@ -191,6 +239,8 @@ msgid "Capacity"
 msgstr ""
 
 #: .\templates\event-detail.html:70
+#: .\templates\index_partials\_future_events.html:18
+#: .\templates\index_partials\_ticket_popup_modal.html:20
 msgid "Buy Tickets"
 msgstr ""
 
@@ -203,17 +253,20 @@ msgid "Event Gallery"
 msgstr ""
 
 #: .\templates\event-detail.html:145
+#: .\templates\index_partials\_ticket_popup_modal.html:8
 msgid "Upcoming Events"
 msgstr ""
 
 #: .\templates\event-detail.html:155 .\templates\event-detail.html:173
-#: .\templates\future_events.html:25 .\templates\index.html:45
-#: .\templates\past_events.html:25
+#: .\templates\future_events.html:31
+#: .\templates\index_partials\_future_events.html:17
+#: .\templates\index_partials\_latest_blogs.html:17
+#: .\templates\past_events.html:30
 msgid "See Details"
 msgstr ""
 
 #: .\templates\event-detail.html:159 .\templates\event-detail.html:177
-#: .\templates\index.html:51
+#: .\templates\index_partials\_future_events.html:25
 msgid "No upcoming events found."
 msgstr ""
 
@@ -221,24 +274,25 @@ msgstr ""
 msgid "Past Events"
 msgstr ""
 
-#: .\templates\future_events.html:8 .\templates\index.html:34
-#: .\templates\layout_partials\_footer.html:32
-#: .\templates\layout_partials\_nav.html:25 .\website\views.py:65
+#: .\templates\future_events.html:14
+#: .\templates\index_partials\_future_events.html:6
+#: .\templates\layout_partials\_footer.html:39
+#: .\templates\layout_partials\_nav.html:25 .\website\views.py:74
 msgid "Future Events"
 msgstr ""
 
-#: .\templates\future_events.html:32
+#: .\templates\future_events.html:38
 msgid ""
 "For now, no events are planned, but keep an eye on our social media and "
 "website for future gatherings."
 msgstr ""
 
-#: .\templates\future_events.html:33
+#: .\templates\future_events.html:39
 msgid ""
 "In this moment of stillness, we await the whirling of future gatherings."
 msgstr ""
 
-#: .\templates\future_events.html:34
+#: .\templates\future_events.html:40
 msgid "No events"
 msgstr ""
 
@@ -289,29 +343,33 @@ msgstr ""
 msgid "Click For More Images..."
 msgstr ""
 
+#: .\templates\index_partials\_latest_blogs.html:6
+msgid "Latest Blogs"
+msgstr ""
+
 #: .\templates\index_partials\_music_example.html:27
 msgid "Click For More Music..."
 msgstr ""
 
-#: .\templates\layout_partials\_footer.html:31
+#: .\templates\layout_partials\_footer.html:36
 #: .\templates\layout_partials\_nav.html:18
 msgid "FAQ"
 msgstr ""
 
-#: .\templates\layout_partials\_footer.html:33
-#: .\templates\layout_partials\_nav.html:26 .\templates\past_events.html:8
-#: .\website\views.py:72
+#: .\templates\layout_partials\_footer.html:42
+#: .\templates\layout_partials\_nav.html:26 .\templates\past_events.html:13
+#: .\website\views.py:82
 msgid "Old Events"
 msgstr ""
 
-#: .\templates\layout_partials\_footer.html:34
-#: .\templates\layout_partials\_nav.html:30 .\website\views.py:53
+#: .\templates\layout_partials\_footer.html:45
+#: .\templates\layout_partials\_nav.html:40 .\website\views.py:58
 msgid "Media"
 msgstr ""
 
-#: .\templates\layout_partials\_footer.html:35
-#: .\templates\layout_partials\_nav.html:33 .\templates\updates.html:8
-#: .\website\views.py:59
+#: .\templates\layout_partials\_footer.html:48
+#: .\templates\layout_partials\_nav.html:43 .\templates\updates.html:13
+#: .\website\views.py:66
 msgid "Updates"
 msgstr ""
 
@@ -319,30 +377,42 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: .\templates\layout_partials\_nav.html:37
-msgid "Language"
+#: .\templates\layout_partials\_nav.html:31
+msgid "Blog"
 msgstr ""
 
-#: .\templates\past_events.html:32
+#: .\templates\past_events.html:37
 msgid "No future events found."
 msgstr ""
 
-#: .\templates\updates.html:23
+#: .\templates\updates.html:28
 msgid "Release date"
 msgstr ""
 
-#: .\website\models.py:61
+#: .\website\models.py:73
 msgid "Upcoming"
 msgstr ""
 
-#: .\website\models.py:62
+#: .\website\models.py:74
 msgid "Ongoing"
 msgstr ""
 
-#: .\website\models.py:63
+#: .\website\models.py:75
 msgid "Past"
 msgstr ""
 
-#: .\website\views.py:30
+#: .\website\models.py:137
+msgid "Draft"
+msgstr ""
+
+#: .\website\models.py:138
+msgid "Published"
+msgstr ""
+
+#: .\website\views.py:20
 msgid "Home"
+msgstr ""
+
+#: .\website\views.py:177
+msgid "Search Blogs"
 msgstr ""

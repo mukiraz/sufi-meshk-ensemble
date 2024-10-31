@@ -14,7 +14,7 @@
                     {% for event in future_events|slice:":3" %}
                     <div class="col-md-4 mb-3 d-flex justify-content-center">
                         <div class="card" style="width: 100%;">
-                            <img src="{{ event.featured_image.url|default:'/path/to/default/image.jpg' }}" class="card-img-top" alt="{{ event.event_name }}">
+                            <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ event.event_name }}</h5>
                                 <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
@@ -23,8 +23,6 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% else %}
-                <p class="text-center">Yaklaşan etkinlik yok.</p>
                 {% endif %}
             </div>
         </div>
