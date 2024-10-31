@@ -221,7 +221,7 @@ msgstr "Son Gönderiler"
 #, fuzzy
 #| msgid "No future events found."
 msgid "No recent blogs found."
-msgstr "Gelecek Etkinlikler"
+msgstr "Güncel blog bulunamadı."
 
 #: .\templates\blog_detail.html:114 .\templates\blog_list_by_category.html:118
 msgid "Tag Cloud"

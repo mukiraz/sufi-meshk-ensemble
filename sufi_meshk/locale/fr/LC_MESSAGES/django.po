@@ -232,7 +232,7 @@ msgstr "Articles récents"
 #, fuzzy
 #| msgid "No future events found."
 msgid "No recent blogs found."
-msgstr "Événements à venir"
+msgstr "Aucun blog récent trouvé."
 
 #: .\templates\blog_detail.html:114 .\templates\blog_list_by_category.html:118
 msgid "Tag Cloud"

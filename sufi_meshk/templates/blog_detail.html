@@ -3,28 +3,120 @@
 {% load i18n %}
 
 {% block meta %}
-    <!-- SEO Meta Tags -->
-    <meta name="title" content="{{ blog.meta_title|default:blog.title }}">
-    <meta name="description" content="{{ blog.meta_description|default:blog.short_description }}">
-    <meta name="keywords" content="{{ blog.meta_keywords }}">
+  <!-- SEO Meta Tags -->
+  <meta name="title" content="{{ blog.meta_title|default:blog.title }}" />
+  <meta name="description" content="{{ blog.meta_description|default:blog.short_description }}" />
+  <meta name="keywords" content="{{ blog.meta_keywords }}" />
 
-    <!-- Author -->
-    <meta name="author" content="{{ blog.meta_author|default:blog.author.name }}">
+  <!-- Author -->
+  <meta name="author" content="{{ blog.meta_author|default:blog.author.name }}" />
 
-    <!-- Open Graph Meta Tags for social media sharing -->
-    <meta property="og:title" content="{{ blog.og_title|default:blog.meta_title }}">
-    <meta property="og:description" content="{{ blog.og_description|default:blog.meta_description }}">
-    <meta property="og:image" content="{% if blog.og_image %}{{ blog.og_image.url }}{% elif blog.featured_image %}{{ blog.featured_image.url }}{% endif %}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <meta property="og:type" content="article">
+  <!-- Open Graph Meta Tags for social media sharing -->
+  <meta property="og:title" content="{{ blog.og_title|default:blog.meta_title }}" />
+  <meta property="og:description" content="{{ blog.og_description|default:blog.meta_description }}" />
+  <meta property="og:image"
+    content="{% if blog.og_image %}
+      {{ blog.og_image.url }}
+    {% elif blog.featured_image %}
+      {{ blog.featured_image.url }}
+    {% endif %}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type" content="article" />
 
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="{{ blog.twitter_card_type|default:'summary_large_image' }}">
-    <meta name="twitter:title" content="{{ blog.meta_title|default:blog.title }}">
-    <meta name="twitter:description" content="{{ blog.meta_description|default:blog.short_description }}">
-    <meta name="twitter:image" content="{% if blog.og_image %}{{ blog.og_image.url }}{% elif blog.featured_image %}{{ blog.featured_image.url }}{% endif %}">
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="{{ blog.twitter_card_type|default:'summary_large_image' }}" />
+  <meta name="twitter:title" content="{{ blog.meta_title|default:blog.title }}" />
+  <meta name="twitter:description" content="{{ blog.meta_description|default:blog.short_description }}" />
+  <meta name="twitter:image"
+    content="{% if blog.og_image %}
+      {{ blog.og_image.url }}
+    {% elif blog.featured_image %}
+      {{ blog.featured_image.url }}
+    {% endif %}" />
+
+  <style>
+    /* CKEditor İçerik Stili */
+    .blog-content {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Başlıklar */
+    .blog-content h2 {
+      font-size: 24px;
+      font-weight: bold;
+      color: #444;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    /* Paragraflar */
+    .blog-content p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    
+    /* Resimler için Stil */
+    .blog-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 10px 0;
+    }
+    
+    /* Resim Hizalamaları */
+    .image-style-align-left {
+      float: left;
+      margin-right: 15px !important;
+    }
+    
+    .image-style-align-right {
+      float: right;
+      margin-left: 15px !important;;
+    }
+    
+    .image-style-align-center {
+      display: block;
+      margin: 0 auto;
+    }
+    
+    /* Resim Ebat Ayarları */
+    .image_resized {
+      width: auto;
+      height: auto;
+    }
+    
+    /* İçerik içerisindeki figcaption (resim alt yazısı) */
+    .blog-content figure {
+      display: inline-block;
+      margin: 0;
+      text-align: center;
+      width: auto;
+      max-width: 100%;
+    }
+    
+    .blog-content figure img {
+      display: block;
+      margin: 0 auto;
+    }
+    
+    .blog-content figure figcaption {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    /* Clearfix (Resimler için float kullandığımızda akışın bozulmaması için) */
+    .blog-content::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  </style>
 {% endblock %}
-
 
 {% block main %}
   <div class="container mt-5">

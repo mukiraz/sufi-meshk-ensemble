@@ -231,7 +231,7 @@ msgstr "Neueste Beiträge"
 #, fuzzy
 #| msgid "No future events found."
 msgid "No recent blogs found."
-msgstr "Zukünftige Veranstaltungen"
+msgstr "Keine aktuellen Blogs gefunden."
 
 #: .\templates\blog_detail.html:114 .\templates\blog_list_by_category.html:118
 msgid "Tag Cloud"
