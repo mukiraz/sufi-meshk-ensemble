@@ -36,4 +36,22 @@
   {% include 'index_partials/_faq.html' %}
 
   {% include 'index_partials/_latest_blogs.html' %}
+
+  {% include 'index_partials/_ticket_popup_modal.html' %}
+
+
 {% endblock %}
+
+
+{% block custom-js %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+          var eventModal = new bootstrap.Modal(document.getElementById('eventModal'), {});
+          eventModal.show();
+      }, 2500); // 5 saniye sonra gösterir
+  });
+</script>
+  
+{% endblock custom-js %}

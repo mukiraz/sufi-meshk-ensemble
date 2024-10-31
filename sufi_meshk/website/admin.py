@@ -32,7 +32,7 @@ admin.site.register(Tag)
 
 class BlogPostAdmin(TranslationAdmin):  # TranslationAdmin kullanıyoruz
     formfield_overrides = {
-        models.TextField: {'widget': CKEditor5Widget},
+        models.TextField: {'widget': CKEditor5Widget(config_name='extends')},
     }
     list_display = ('title', 'author', 'status', 'create_date')
     search_fields = ('title', 'content')
