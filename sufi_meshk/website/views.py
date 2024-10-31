@@ -1,4 +1,4 @@
-import boto3
+import boto3, uuid
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -6,9 +6,24 @@ from django.conf import settings
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import GroupMember, FAQ, Update, Event, BlogPost, Category, Tag
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 
 # Views
+
+@csrf_exempt
+def upload_image(request):
+    print("deneme")
+    if request.method == "POST" and request.FILES.get("upload"):
+        upload = request.FILES["upload"]
+        file_name = f'image_upload/{uuid.uuid4()}_{upload.name}'  # Benzersiz bir dosya adı oluştur
+        file_path = default_storage.save(file_name, ContentFile(upload.read()))
+        file_url = f"{settings.MEDIA_URL}{file_path}"
+        return JsonResponse({"url": file_url})
+    return JsonResponse({"error": "Dosya yüklenemedi"}, status=400)
 
 def index(request):
     faqs = FAQ.objects.all()

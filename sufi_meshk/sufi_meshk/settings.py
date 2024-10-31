@@ -233,7 +233,7 @@ CKEDITOR_5_CONFIGS = {
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable',],
         'imageUpload': {
-            'uploadUrl': '/ckeditor/upload/'  # Django'da ckeditor_uploader.urls tarafından yönetilir
+            'uploadUrl': '/ckeditor5/image_upload/'  # Django'da ckeditor_uploader.urls tarafından yönetilir
         },
         'image': {
             'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
