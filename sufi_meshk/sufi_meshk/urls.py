@@ -31,10 +31,12 @@ sitemaps = {
     'static':StaticViewSitemap
 }
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # Include the set_language URL
-    path("ckeditor5/", include('django_ckeditor_5.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),  # CKEditor 5 ana yolları
+    path("ckeditor/upload/", include("ckeditor_uploader.urls")),  # CKEditor yükleme yolları
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

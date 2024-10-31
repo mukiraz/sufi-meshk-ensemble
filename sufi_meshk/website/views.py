@@ -1,4 +1,3 @@
-import os
 import boto3
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
