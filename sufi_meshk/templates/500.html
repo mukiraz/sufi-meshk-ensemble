@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block meta %}
+    {% include "_metatags_partials.html" %}
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 100vh; background-color: white;">
+    <div class="row align-items-center w-100">
+        <!-- Logo Section -->
+        <div class="col-md-6 text-center">
+            <img src="{{ MEDIA_URL }}logo.png" alt="" height="250" width="250" />
+        </div>
+        
+        <!-- Message Section -->
+        <div class="col-md-6">
+            <h2 class="text-danger">{% translate "500 - An Error Occurred" %}</h2>
+            <p>{% translate "A problem has occurred." %}</p>
+            <a href="{% url 'index' %}" class="btn btn-primary mt-3">{% translate "Return to Homepage" %}</a>
+        </div>
+    </div>
+  </div>
+{% endblock %}

@@ -24,10 +24,10 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.event_name }}</h5>
-                            <p class="card-text">{{ event.description }}</p>
+                            <p class="card-text">{{ event.description|safe|truncatewords:20 }}</p>
                             <p class="card-text"><small class="text-body-secondary">{% translate "Date" %}: {{ event.date }}</small></p>
                             <p class="card-text"><small class="text-body-secondary">{% translate "Place" %}: {{ event.place }}</small></p>
-                            <a href="{% url 'event_detail' event.id %}" class="btn btn-primary">{% translate "See Details" %}</a>
+                            <a href="{% url 'event_detail' event.slug %}" class="btn btn-primary">{% translate "See Details" %}</a>
                         </div>
                     </div>
                 </div>

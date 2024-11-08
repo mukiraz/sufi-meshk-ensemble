@@ -43,8 +43,8 @@ def about_us(request):
     }
     return render(request, 'about-us.html', context)
 
-def group_member_detail(request, id):
-    member = get_object_or_404(GroupMember, id=id)
+def group_member_detail(request, slug):
+    member = get_object_or_404(GroupMember, slug=slug)
     context = {
         'member': member,
         "title": f"{member.name} {member.surname}"
@@ -97,19 +97,27 @@ def past_events_view(request):
     }
     return render(request, 'past_events.html', context)
 
-def event_detail_view(request, event_id):
-    event = get_object_or_404(Event, id=event_id)
-    now = timezone.now().date()
-    future_events = Event.objects.filter(date__gte=now).exclude(id=event_id).order_by('date')
-    past_events = Event.objects.filter(date__lt=now).exclude(id=event_id).order_by('-date')[:4]
+def event_detail_view(request, slug):
+    event = get_object_or_404(Event, slug=slug)
+    current_datetime = timezone.now()
+    today = current_datetime.date()
+    now = current_datetime.time()
+    
+    future_events = Event.objects.filter(date__gte=today).exclude(slug=slug).order_by('date')
+    past_events = Event.objects.filter(date__lt=today).exclude(slug=slug).order_by('-date')[:4]
     
     context = {
         'event': event,
         'future_events': future_events,
         'past_events': past_events,
-        "title": event.event_name
+        'title': event.event_name,
+        'today': today,   # Güncel tarih
+        'now': now        # Güncel saat
     }
     return render(request, 'event-detail.html', context)
+
+def custom_404_view(request, exception=None):
+    return render(request, '404.html', status=404)
 
 class BlogListByCategoryView(ListView):
     model = BlogPost
@@ -202,3 +210,4 @@ class BlogDetailView(DetailView):
         context['tags'] = Tag.objects.all()
         context['title'] = self.object.title
         return context
+    

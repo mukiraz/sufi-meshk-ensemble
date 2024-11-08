@@ -156,26 +156,60 @@
         <!-- 6. Author Information -->
         <div class="card mb-4">
           <div class="card-body text-center">
-            <!-- Author's Image -->
-            <img src="{{ blog.author.photo.url }}" alt="Author Image" class="rounded-circle mb-3" style="width: 100px; height: 100px;" />
+            {% if blog.author %}
+              <!-- Author's Image -->
+              <h4 class="pb-2">Author Information</h4>
+              <hr />
+              {% if blog.author.photo %}
+                <img src="{{ blog.author.photo.url }}" alt="Author Image" class="rounded-circle mb-3" style="width: 100px; height: 100px;" />
+              {% else %}
+                <img src="{% static 'default_author_image.jpg' %}" alt="Default Author Image" class="rounded-circle mb-3" style="width: 100px; height: 100px;" />
+              {% endif %}
 
-            <!-- Author's Name -->
-            <h5 class="card-title">{{ blog.author.name }} {{ blog.author.surname }}</h5>
+              <!-- Author's Name -->
+              <h5 class="card-title">{{ blog.author.name }} {{ blog.author.surname }}</h5>
+              <h6 class="card-title">{{ blog.author.position }}</h6>
 
-            <!-- Author's Position -->
-            <p class="card-text">
-              <strong>{{ blog.author.position }}</strong>
-            </p>
+              <!-- Author's Short Description -->
+              <p class="card-text">{{ blog.author.short_description }}</p>
 
-            <!-- Author's Short Description -->
-            <p class="card-text">{{ blog.author.short_description }}</p>
+              <hr />
 
-            <!-- Social Media Links -->
-            <div class="social-icons">
-              {% for social_link in blog.author.social_media_links.all %}
-                <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-lg"></i></a>
-              {% endfor %}
-            </div>
+              <!-- Contact Information with Icons -->
+              <ul class="list-unstyled mb-3">
+                {% if blog.author.phone %}
+                  <li>
+                    <i class="fas fa-phone text-info me-2"></i>
+                    <a href="tel:{{ blog.author.phone }}" class="text-dark">{{ blog.author.phone }}</a>
+                  </li>
+                {% endif %}
+
+                {% if blog.author.email %}
+                  <li>
+                    <i class="fas fa-envelope text-info me-2"></i>
+                    <a href="mailto:{{ blog.author.email }}" class="text-dark">{{ blog.author.email }}</a>
+                  </li>
+                {% endif %}
+
+                {% if blog.author.address %}
+                  <li>
+                    <i class="fas fa-map-marker-alt text-info me-2"></i>
+                    <span class="text-dark">{{ blog.author.address }}</span>
+                  </li>
+                {% endif %}
+              </ul>
+
+              <hr />
+
+              <!-- Social Media Links -->
+              <div class="social-icons">
+                {% for social_link in blog.author.social_media_links.all %}
+                  <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-lg"></i></a>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="text-muted">No author information available for this blog.</p>
+            {% endif %}
           </div>
         </div>
 

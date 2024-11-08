@@ -1,0 +1,12 @@
+@use '../custom' as *;
+
+.tag-cloud a {
+    transition: all 0.3s ease;
+}
+
+.tag-cloud a:hover {
+    font-size: 1.05em; /* Biraz büyütmek için */
+    color: $light;
+    background-color: $success /* Bootstrap success rengi */
+}
+

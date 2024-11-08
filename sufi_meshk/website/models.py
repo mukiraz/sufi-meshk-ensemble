@@ -20,9 +20,13 @@ class Author(models.Model):
     short_description = models.CharField(max_length=300, help_text="A short bio of the author")
     photo = models.ImageField(upload_to='authors/', help_text="Photo of the author", blank=True, null=True)
     social_media_links = models.ManyToManyField(SocialMediaLink, blank=True, help_text="Author's social media links")
+    phone = models.CharField(max_length=20, null=True, blank=True, help_text="Author's phone number")
+    email = models.EmailField(max_length=255, null=True, blank=True, help_text="Author's email address")
+    address = models.CharField(max_length=255, null=True, blank=True, help_text="Author's address")
 
     def __str__(self):
         return f"{self.name} {self.surname}"
+
 
 class GroupMember(models.Model):
     name = models.CharField(max_length=100)
@@ -32,9 +36,16 @@ class GroupMember(models.Model):
     description = models.TextField()
     photo = models.ImageField(upload_to='group_members/', help_text="Photo of the member")
     is_active = models.BooleanField()
+    slug = models.SlugField(max_length=255, blank=True)  # Yeni slug alanı
 
     def __str__(self):
         return f"{self.name} {self.surname}"
+    
+    def save(self, *args, **kwargs):
+        # Slug boşsa name ve surname alanlarından oluştur
+        if not self.slug:
+            self.slug = slugify(f"{self.name} {self.surname}")
+        super(GroupMember, self).save(*args, **kwargs)
     
 class FAQ(models.Model):
     question = models.CharField(max_length=400)
@@ -57,28 +68,21 @@ class Update(models.Model):
 class Event(models.Model):
     featured_image = models.ImageField(upload_to='events/featured/')
     event_name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True)
     description = models.TextField()
     date = models.DateField()
     time = models.TimeField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     end_time = models.TimeField(null=True, blank=True)
     place = models.CharField(max_length=255)
-    maps_iframe = models.TextField(null=True, blank=True)
-    ticket_link = models.URLField(max_length=200, null=True, blank=True)
+    maps_iframe = models.CharField(max_length=1000, null=True, blank=True)
+    ticket_link = models.URLField(max_length=200, null=True, blank=True, help_text="General ticket link")
+    eventfrog_link = models.CharField(max_length=1000, null=True, blank=True, help_text="Link to Eventfrog ticket page")
     category = models.CharField(max_length=100, null=True, blank=True)
-    organizer = models.CharField(max_length=255, null=True, blank=True)
-    status = models.CharField(
-        max_length=50,
-        choices=[
-            ('upcoming', _('Upcoming')),
-            ('ongoing', _('Ongoing')),
-            ('past', _('Past'))
-        ],
-        default='upcoming'
-    )
+    author = models.ForeignKey(Author, null=True, blank=True, on_delete=models.SET_NULL, related_name="events", help_text="Event organizer")
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    contact_info = models.TextField(null=True, blank=True)
     capacity = models.IntegerField(null=True, blank=True)
+    social_media_links = models.ManyToManyField('SocialMediaLink', blank=True, help_text="Social media links related to this event")
     published = models.BooleanField(default=True)
     tags = models.CharField(max_length=500, null=True, blank=True)
 
@@ -86,19 +90,10 @@ class Event(models.Model):
         return self.event_name
 
     def save(self, *args, **kwargs):
-        self.set_status()
+        if not self.slug:
+            self.slug = slugify(self.event_name)
         super(Event, self).save(*args, **kwargs)
-
-    def set_status(self):
-        """Determine and set the status of the event based on the current date."""
-        now = timezone.now().date()
-        if self.end_date and self.end_date < now:
-            self.status = 'past'
-        elif self.date == now:
-            self.status = 'ongoing'
-        elif self.date > now:
-            self.status = 'upcoming'
-
+    
 
 class EventImage(models.Model):
     event = models.ForeignKey(Event, related_name='images', on_delete=models.CASCADE)

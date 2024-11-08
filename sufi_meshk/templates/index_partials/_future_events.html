@@ -13,8 +13,8 @@
               <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
               <div class="card-body text-center">
                   <h5 class="card-title">{{ event.event_name }}</h5>
-                  <p class="card-text">{{ event.description|truncatewords:20 }}</p>
-                  <a href="{% url 'event_detail' event.id %}" class="btn btn-success text-white">{% translate 'See Details' %}</a>
+                  <p class="card-text">{{ event.description|safe|truncatewords:20 }}</p>
+                  <a href="{% url 'event_detail' event.slug %}" class="btn btn-success text-white">{% translate 'See Details' %}</a>
                   <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
               </div>
           </div>

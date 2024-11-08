@@ -20,10 +20,13 @@ class EventImageInline(admin.TabularInline):
     extra = 1  # Number of empty forms to display
 
 class EventAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditor5Widget(config_name='extends')},
+    }
     inlines = [EventImageInline]
-    list_display = ('event_name', 'date', 'place', 'status')
+    list_display = ('event_name', 'date', 'place') 
     search_fields = ('event_name', 'description', 'place')
-    list_filter = ('status', 'date')
+    list_filter = ('date',)  
 
 admin.site.register(Event, EventAdmin)
 

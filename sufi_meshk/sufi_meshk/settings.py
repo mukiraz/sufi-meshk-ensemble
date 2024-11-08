@@ -30,8 +30,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 SITE_URL = "https://sufimeshk.org"
 
-DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1")
-
+#DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1")
+DEBUG = False
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 
 #ALLOWED_HOSTS = ['127.0.0.1']

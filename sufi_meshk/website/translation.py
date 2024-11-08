@@ -16,7 +16,7 @@ class UpdateTranslationOptions(TranslationOptions):
 
 @register(Event)
 class EventTranslationOptions(TranslationOptions):
-    fields = ('event_name', 'description', 'place', 'category', 'organizer', 'status', 'contact_info', 'tags')
+    fields = ('event_name', 'description', 'place', 'category', 'tags')
 
 @register(Category)
 class CategoryTranslationOptions(TranslationOptions):
