@@ -36,7 +36,7 @@ class GroupMember(models.Model):
     description = models.TextField()
     photo = models.ImageField(upload_to='group_members/', help_text="Photo of the member")
     is_active = models.BooleanField()
-    slug = models.SlugField(max_length=255, blank=True)  # Yeni slug alanı
+    slug = models.SlugField(max_length=255, unique=True, blank=True)  # Yeni slug alanı
 
     def __str__(self):
         return f"{self.name} {self.surname}"
@@ -68,7 +68,7 @@ class Update(models.Model):
 class Event(models.Model):
     featured_image = models.ImageField(upload_to='events/featured/')
     event_name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     description = models.TextField()
     date = models.DateField()
     time = models.TimeField(null=True, blank=True)
