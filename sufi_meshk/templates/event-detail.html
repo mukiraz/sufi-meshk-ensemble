@@ -155,11 +155,10 @@
             </div>
             <div class="card-footer text-center">
               <div class="d-flex justify-content-center mb-2">
-                {% for social_link in event.author.social_media_links.all %}
+                {% for social_link in event.social_media_links.all %}
                   <a href="{{ social_link.url }}" target="_blank" rel="noopener noreferrer" class="mx-2"><i class="{{ social_link.icon_class }} fa-lg text-success"></i></a>
                 {% endfor %}
               </div>
-              <a href="#" class="btn btn-warning text-white w-100"><i class="fas fa-share-alt"></i> {% translate 'Share' %}</a>
             </div>
           </div>
         </div>
