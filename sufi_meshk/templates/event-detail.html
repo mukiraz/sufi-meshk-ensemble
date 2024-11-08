@@ -125,7 +125,7 @@
                 {% if event.eventfrog_link %}
                   {{ event.eventfrog_link|safe }}
                 {% elif event.ticket_link %}
-                  <a href="{{ event.ticket_link }}" class="btn btn-light w-100 mb-2" target="_blank">{% translate 'Buy tickets' %}</a>
+                  <a href="{{ event.ticket_link }}" class="btn btn-success w-100 mb-2" target="_blank">{% translate 'Buy tickets' %}</a>
                 {% endif %}
               {% else %}
                 <h4>{% translate 'Event Information' %}</h4>
