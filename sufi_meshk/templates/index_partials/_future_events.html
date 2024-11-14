@@ -1,31 +1,41 @@
 {% load i18n %}
 
 <div class="container">
-    <div class="row mb-5">
-      <div class="col">
-        <h2 class="text-center">{% translate 'Future Events' %}</h2>
-      </div>
+  <div class="row mb-5">
+    <div class="col">
+      <h2 class="text-center">{% translate 'Future Events' %}</h2>
     </div>
-    <div class="row d-flex justify-content-center">
-      {% for event in future_events %}
-        <div class="col-md-4 mb-3 d-flex justify-content-center">
-          <div class="card" style="width: 100%;">
-              <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
-              <div class="card-body text-center">
-                  <h5 class="card-title">{{ event.event_name }}</h5>
-                  <p class="card-text">{{ event.description|safe|truncatewords:20 }}</p>
-                  <a href="{% url 'event_detail' event.slug %}" class="btn btn-success text-white">{% translate 'See Details' %}</a>
-                  <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
-              </div>
-          </div>
-      </div>
-      {% empty %}
-        <div class="col">
-          <p class="text-muted text-center text-warning">
-            {% translate 'No upcoming events found.' %}
-          </p>
-        </div>
-      {% endfor %}
-    </div>
-    <hr class="mt-5" />
   </div>
+  <div class="row d-flex justify-content-center">
+    {% for event in future_events %}
+      <div class="col-md-4 mb-3 d-flex justify-content-center">
+        <div class="card" style="width: 100%;">
+          <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ event.event_name }}</h5>
+            <p class="card-text">{{ event.description|safe|truncatewords:20 }}</p>
+            <div class="d-flex justify-content-center gap-2 mt-2">
+              <a href="{% url 'event_detail' event.slug %}" class="btn btn-info text-white">{% translate 'See Details' %}</a>
+
+              {% if event.eventfrog_link %}
+                <a href="{{ event.eventfrog_link }}" class="btn btn-success d-flex align-items-center text-white">
+                  <span class="icon me-2"><img src="{{ MEDIA_URL }}eventfrog_logo.png" alt="Event Frog" style="height: 1em;" /></span>
+                  {% translate 'Buy Tickets' %}
+                </a>
+              {% elif event.ticket_link %}
+                <a href="{{ event.ticket_link }}" class="btn btn-success w-100 mb-2" target="_blank">{% translate 'Buy tickets' %}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col">
+        <p class="text-muted text-center text-warning">
+          {% translate 'No upcoming events found.' %}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+  <hr class="mt-5" />
+</div>

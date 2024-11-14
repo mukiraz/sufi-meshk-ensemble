@@ -2,30 +2,40 @@
 
 <!-- Modal -->
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel">{% translate "Upcoming Events" %}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {% if future_events %}
-                <div class="row d-flex justify-content-center">
-                    {% for event in future_events|slice:":3" %}
-                    <div class="col-md-4 mb-3 d-flex justify-content-center">
-                        <div class="card" style="width: 100%;">
-                            <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
-                            <div class="card-body text-center">
-                                <h5 class="card-title">{{ event.event_name }}</h5>
-                                <a href="{{ event.ticket_link }}" class="btn btn-primary" target="_blank">{% translate "Buy Tickets" %}</a>
-                            </div>
-                        </div>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">{% translate 'Upcoming Events' %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {% if future_events %}
+          <div class="row d-flex justify-content-center">
+            {% for event in future_events|slice:':3' %}
+              <div class="col-md-4 mb-3 d-flex justify-content-center">
+                <div class="card" style="width: 100%;">
+                  <img src="{{ event.featured_image.url }}" class="card-img-top" alt="{{ event.event_name }}" />
+                  <div class="card-body text-center">
+                    <h5 class="card-title">{{ event.event_name }}</h5>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                      <a href="{% url 'event_detail' event.slug %}" class="btn btn-info text-white">{% translate 'Details' %}</a>
+        
+                      {% if event.eventfrog_link %}
+                        <a href="{{ event.eventfrog_link }}" class="btn btn-success d-flex align-items-center text-white">
+                          <span class="icon me-2"><img src="{{ MEDIA_URL }}eventfrog_logo.png" alt="Event Frog" style="height: 1em;" /></span>
+                          {% translate 'Tickets' %}
+                        </a>
+                      {% elif event.ticket_link %}
+                        <a href="{{ event.ticket_link }}" class="btn btn-success w-100 mb-2" target="_blank">{% translate 'Tickets' %}</a>
+                      {% endif %}
                     </div>
-                    {% endfor %}
+                  </div>
                 </div>
-                {% endif %}
-            </div>
-        </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </div>
-

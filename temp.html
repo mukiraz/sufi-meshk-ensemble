@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Buy Tickets Button</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .btn-buy-tickets {
+      background-color: #4CAF50; /* Buton rengini yeşil yap */
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center; /* İçerikleri yatayda ortala */
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .btn-buy-tickets .icon {
+      margin-right: 10px;
+      display: flex; /* Simgeyi ortalamak için flex kullan */
+      align-items: center;
+      width: 24px; /* Simge genişliğini ayarla */
+      height: 24px; /* Simge yüksekliğini ayarla */
+    }
+    .btn-buy-tickets img {
+      max-width: 100%; /* Görselin genişliğini kapsayıcıya uydur */
+      max-height: 100%; /* Görselin yüksekliğini kapsayıcıya uydur */
+    }
+    /* Hover durumunda arka plan rengi koyulaşırken metin rengini beyaz yap */
+    .btn-buy-tickets:hover {
+      background-color: #45a049; /* Hover rengini ayarla */
+      color: white; /* Metin rengini beyaz tut */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <a href="https://example.com" class="btn btn-buy-tickets">
+    <span class="icon">
+      <img src="eventfrog_logo.png" alt="Kurbağa Simgesi">
+    </span>
+    Buy Tickets
+</a>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

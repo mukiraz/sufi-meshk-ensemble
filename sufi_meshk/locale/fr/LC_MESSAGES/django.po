@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-08 18:26+0100\n"
+"POT-Creation-Date: 2024-11-14 12:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\templates\404.html:18
+#: .\templates\404.html:19
 msgid "404 - Page Not Found"
 msgstr "404 - Page non trouvée"
 
-#: .\templates\404.html:19
+#: .\templates\404.html:20
 msgid "The page you are looking for does not exist or may have been removed."
 msgstr "La page que vous recherchez n'existe pas ou a peut-être été supprimée."
 
-#: .\templates\404.html:20 .\templates\500.html:20
+#: .\templates\404.html:21 .\templates\500.html:21
 msgid "Return to Homepage"
 msgstr "Retourner à la page d'accueil"
 
-#: .\templates\500.html:18
+#: .\templates\500.html:19
 msgid "500 - An Error Occurred"
 msgstr "500 - Une erreur est survenue"
 
-#: .\templates\500.html:19
+#: .\templates\500.html:20
 msgid "A problem has occurred."
 msgstr "Un problème est survenu."
 
@@ -149,11 +149,11 @@ msgstr ""
 "la musique soufie, invitant notre public à découvrir son pouvoir "
 "transformateur."
 
-#: .\templates\about-us.html:54 .\templates\event-detail.html:303
+#: .\templates\about-us.html:54 .\templates\event-detail.html:289
 msgid "Previous"
 msgstr "Précédent"
 
-#: .\templates\about-us.html:58 .\templates\event-detail.html:307
+#: .\templates\about-us.html:58 .\templates\event-detail.html:293
 msgid "Next"
 msgstr "Suivant"
 
@@ -290,39 +290,35 @@ msgstr "Tags"
 msgid "No blogs found in this category or tag."
 msgstr "Aucun blog trouvé dans cette catégorie ou avec ce tag."
 
-#: .\templates\event-detail.html:146
-#, fuzzy
-#| msgid "Buy Tickets"
-msgid "Buy tickets"
-msgstr "Acheter des billets"
+#: .\templates\event-detail.html:130 .\templates\event-detail.html:133
+#: .\templates\index_partials\_ticket_popup_modal.html:26
+#: .\templates\index_partials\_ticket_popup_modal.html:29
+msgid "Tickets"
+msgstr "Billets"
 
-#: .\templates\event-detail.html:149
+#: .\templates\event-detail.html:137
 msgid "Event Information"
 msgstr "Informations sur l'événement"
 
-#: .\templates\event-detail.html:183
-msgid "Share"
-msgstr "Partager"
-
-#: .\templates\event-detail.html:197
+#: .\templates\event-detail.html:181
 msgid "Event Details"
 msgstr "Détails de l'événement"
 
-#: .\templates\event-detail.html:210
+#: .\templates\event-detail.html:194
 msgid "Contact Information"
 msgstr "Informations de contact"
 
-#: .\templates\event-detail.html:259
+#: .\templates\event-detail.html:244
 msgid "No author information available for this event."
 msgstr "Aucune information sur l'auteur pour cet événement."
 
-#: .\templates\event-detail.html:269 .\templates\event-detail.html:284
+#: .\templates\event-detail.html:255 .\templates\event-detail.html:270
 #, fuzzy
 #| msgid "Gallery"
 msgid "Event Gallery"
 msgstr "Galerie"
 
-#: .\templates\event-detail.html:318
+#: .\templates\event-detail.html:304
 #, fuzzy
 #| msgid "Location"
 msgid "Event Location"
@@ -344,7 +340,7 @@ msgid "Place"
 msgstr "Lieu"
 
 #: .\templates\future_events.html:31
-#: .\templates\index_partials\_future_events.html:17
+#: .\templates\index_partials\_future_events.html:18
 #: .\templates\index_partials\_latest_blogs.html:17
 #: .\templates\past_events.html:30
 msgid "See Details"
@@ -430,12 +426,17 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr "Questions fréquemment posées"
 
-#: .\templates\index_partials\_future_events.html:18
-#: .\templates\index_partials\_ticket_popup_modal.html:20
+#: .\templates\index_partials\_future_events.html:23
 msgid "Buy Tickets"
 msgstr "Acheter des billets"
 
-#: .\templates\index_partials\_future_events.html:25
+#: .\templates\index_partials\_future_events.html:26
+#, fuzzy
+#| msgid "Buy Tickets"
+msgid "Buy tickets"
+msgstr "Acheter des billets"
+
+#: .\templates\index_partials\_future_events.html:35
 msgid "No upcoming events found."
 msgstr "Aucun événement à venir trouvé."
 
@@ -458,6 +459,10 @@ msgstr "Cliquez pour plus de musique..."
 #: .\templates\index_partials\_ticket_popup_modal.html:8
 msgid "Upcoming Events"
 msgstr "Événements à venir"
+
+#: .\templates\index_partials\_ticket_popup_modal.html:21
+msgid "Details"
+msgstr "Détails"
 
 #: .\templates\layout_partials\_footer.html:36
 #: .\templates\layout_partials\_nav.html:18
@@ -512,6 +517,9 @@ msgstr "Accueil"
 #: .\website\views.py:199
 msgid "Search Blogs"
 msgstr "Rechercher des blogs"
+
+#~ msgid "Share"
+#~ msgstr "Partager"
 
 #~ msgid "End Date"
 #~ msgstr "Date de fin"

@@ -25,10 +25,21 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{ event.event_name }}</h5>
-                            <p class="card-text">{{ event.description|safe }}</p>
+                            <p class="card-text">{{ event.description|safe|truncatewords:150 }}</p>
                             <p class="card-text"><small class="text-body-secondary">{% translate "Date" %}: {{ event.date }}</small></p>
                             <p class="card-text"><small class="text-body-secondary">{% translate "Place" %}: {{ event.place }}</small></p>
-                            <a href="{% url 'event_detail' event.slug %}" class="btn btn-primary">{% translate "See Details" %}</a>
+                            <div class="d-flex justify-content-start gap-2 mt-2">
+                                <a href="{% url 'event_detail' event.slug %}" class="btn btn-info text-white">{% translate 'See Details' %}</a>
+                  
+                                {% if event.eventfrog_link %}
+                                  <a href="{{ event.eventfrog_link }}" class="btn btn-success d-flex align-items-center text-white">
+                                    <span class="icon me-2"><img src="{{ MEDIA_URL }}eventfrog_logo.png" alt="Event Frog" style="height: 1em;" /></span>
+                                    {% translate 'Buy Tickets' %}
+                                  </a>
+                                {% elif event.ticket_link %}
+                                  <a href="{{ event.ticket_link }}" class="btn btn-success w-100 mb-2" target="_blank">{% translate 'Buy tickets' %}</a>
+                                {% endif %}
+                              </div>
                         </div>
                     </div>
                 </div>

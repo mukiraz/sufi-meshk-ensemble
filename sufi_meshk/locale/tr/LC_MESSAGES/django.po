@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-08 18:26+0100\n"
+"POT-Creation-Date: 2024-11-14 12:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\templates\404.html:18
+#: .\templates\404.html:19
 msgid "404 - Page Not Found"
 msgstr "404 - Sayfa Bulunamadı"
 
-#: .\templates\404.html:19
+#: .\templates\404.html:20
 msgid "The page you are looking for does not exist or may have been removed."
 msgstr "Aradığınız sayfa mevcut değil veya kaldırılmış olabilir."
 
-#: .\templates\404.html:20 .\templates\500.html:20
+#: .\templates\404.html:21 .\templates\500.html:21
 msgid "Return to Homepage"
 msgstr "Ana Sayfaya Dön"
 
-#: .\templates\500.html:18
+#: .\templates\500.html:19
 msgid "500 - An Error Occurred"
 msgstr "500 - Bir hata oluştu"
 
-#: .\templates\500.html:19
+#: .\templates\500.html:20
 msgid "A problem has occurred."
 msgstr "Bir problem oluştu."
 
@@ -141,11 +141,11 @@ msgstr ""
 "müziğinin zamansız güzelliğini paylaşmayı, izleyicilerimizi onun dönüştürücü "
 "gücünü deneyimlemeye davet etmeyi hedefliyoruz."
 
-#: .\templates\about-us.html:54 .\templates\event-detail.html:303
+#: .\templates\about-us.html:54 .\templates\event-detail.html:289
 msgid "Previous"
 msgstr "Önceki"
 
-#: .\templates\about-us.html:58 .\templates\event-detail.html:307
+#: .\templates\about-us.html:58 .\templates\event-detail.html:293
 msgid "Next"
 msgstr "Sonraki"
 
@@ -279,37 +279,33 @@ msgstr "Etiketler"
 msgid "No blogs found in this category or tag."
 msgstr "Bu kategori veya etikette blog bulunamadı."
 
-#: .\templates\event-detail.html:146
-#, fuzzy
-#| msgid "Buy Tickets"
-msgid "Buy tickets"
-msgstr "Bilet Al"
+#: .\templates\event-detail.html:130 .\templates\event-detail.html:133
+#: .\templates\index_partials\_ticket_popup_modal.html:26
+#: .\templates\index_partials\_ticket_popup_modal.html:29
+msgid "Tickets"
+msgstr "Bilet"
 
-#: .\templates\event-detail.html:149
+#: .\templates\event-detail.html:137
 msgid "Event Information"
 msgstr "Etkinlik Bilgileri"
 
-#: .\templates\event-detail.html:183
-msgid "Share"
-msgstr "Paylaş"
-
-#: .\templates\event-detail.html:197
+#: .\templates\event-detail.html:181
 msgid "Event Details"
 msgstr "Etkinlik Detayları"
 
-#: .\templates\event-detail.html:210
+#: .\templates\event-detail.html:194
 msgid "Contact Information"
 msgstr "İletişim Bilgileri"
 
-#: .\templates\event-detail.html:259
+#: .\templates\event-detail.html:244
 msgid "No author information available for this event."
 msgstr "Bu etkinlik için yazar bilgisi mevcut değil."
 
-#: .\templates\event-detail.html:269 .\templates\event-detail.html:284
+#: .\templates\event-detail.html:255 .\templates\event-detail.html:270
 msgid "Event Gallery"
 msgstr "Etkinlik Galerisi"
 
-#: .\templates\event-detail.html:318
+#: .\templates\event-detail.html:304
 #, fuzzy
 #| msgid "Location"
 msgid "Event Location"
@@ -331,7 +327,7 @@ msgid "Place"
 msgstr "Yer"
 
 #: .\templates\future_events.html:31
-#: .\templates\index_partials\_future_events.html:17
+#: .\templates\index_partials\_future_events.html:18
 #: .\templates\index_partials\_latest_blogs.html:17
 #: .\templates\past_events.html:30
 msgid "See Details"
@@ -412,12 +408,15 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr "Sıkça Sorulan Sorular"
 
-#: .\templates\index_partials\_future_events.html:18
-#: .\templates\index_partials\_ticket_popup_modal.html:20
+#: .\templates\index_partials\_future_events.html:23
 msgid "Buy Tickets"
 msgstr "Bilet Al"
 
-#: .\templates\index_partials\_future_events.html:25
+#: .\templates\index_partials\_future_events.html:26
+msgid "Buy tickets"
+msgstr "Bilet Al"
+
+#: .\templates\index_partials\_future_events.html:35
 msgid "No upcoming events found."
 msgstr "Yaklaşan etkinlik bulunamadı."
 
@@ -440,6 +439,10 @@ msgstr "Daha Fazla Müzik İçin Tıklayın..."
 #: .\templates\index_partials\_ticket_popup_modal.html:8
 msgid "Upcoming Events"
 msgstr "Yaklaşan Etkinlikler"
+
+#: .\templates\index_partials\_ticket_popup_modal.html:21
+msgid "Details"
+msgstr "Detaylar"
 
 #: .\templates\layout_partials\_footer.html:36
 #: .\templates\layout_partials\_nav.html:18
@@ -494,6 +497,9 @@ msgstr "Ana Sayfa"
 #: .\website\views.py:199
 msgid "Search Blogs"
 msgstr "Bloglarda Ara"
+
+#~ msgid "Share"
+#~ msgstr "Paylaş"
 
 #~ msgid "End Date"
 #~ msgstr "Bitiş Tarihi"

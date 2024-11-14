@@ -11844,6 +11844,33 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.btn-buy-tickets {
+  background-color: #4CAF50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.btn-buy-tickets .icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+.btn-buy-tickets img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.btn-buy-tickets:hover {
+  background-color: #45a049;
+  color: white;
+}
+
 .menu {
   background: linear-gradient(to right, rgba(255, 193, 7, 0.95), rgba(255, 214, 92, 0.95));
 }
