@@ -9,15 +9,12 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-from dotenv import load_dotenv, dotenv_values
 import os
 from pathlib import Path
-from core.storages import StaticStorage, MediaStorage
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv() 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -30,7 +27,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 SITE_URL = "https://sufimeshk.org"
 
-DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1")
+#DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+DEBUG =True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 
@@ -40,7 +38,6 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 
 INSTALLED_APPS = [
     'website',
-    'core',
     'django_ckeditor_5',
     'ckeditor_uploader',
     'modeltranslation',
@@ -135,32 +132,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# Static files (CSS, JavaScript, images)
-STATICFILES_STORAGE = 'core.storages.StaticStorage'
-
-# Media files (user-uploaded content)
-DEFAULT_FILE_STORAGE = 'core.storages.MediaStorage'
-
-# AWS S3 Configuration
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-# To prevent URL generation with query string auth
-AWS_QUERYSTRING_AUTH = False
 
 # Static and media URLs
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

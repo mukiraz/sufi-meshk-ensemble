@@ -1,4 +1,4 @@
-import boto3, uuid
+import os, uuid
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -16,12 +16,11 @@ from django.core.files.base import ContentFile
 
 @csrf_exempt
 def upload_image(request):
-    print("deneme")
     if request.method == "POST" and request.FILES.get("upload"):
         upload = request.FILES["upload"]
         file_name = f'image_upload/{uuid.uuid4()}_{upload.name}'  # Benzersiz bir dosya adı oluştur
         file_path = default_storage.save(file_name, ContentFile(upload.read()))
-        file_url = f"{settings.MEDIA_URL}{file_path}"
+        file_url = f"{settings.MEDIA_URL}{file_path}"  # URL oluşturma
         return JsonResponse({"url": file_url})
     return JsonResponse({"error": "Dosya yüklenemedi"}, status=400)
 
@@ -52,21 +51,14 @@ def group_member_detail(request, slug):
     return render(request, 'group-member.html', context)
 
 def gallery_view(request):
-    s3 = boto3.client('s3')
-    bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-    prefix = 'media/gallery/'  # S3 bucket içindeki klasör yolu
-
-    # 'gallery' klasöründeki tüm nesneleri listele
-    result = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
-
-    # Görüntülerin URL'lerini oluştur
+    media_dir = settings.MEDIA_ROOT / 'gallery'  # Yerel medya dosyalarının yolu
     images = []
-    for content in result.get('Contents', []):
-        key = content['Key']
-        if key.endswith(('jpg', 'jpeg', 'png', 'gif')):
-            url = f'https://{settings.AWS_S3_CUSTOM_DOMAIN}/{key}'
-            images.append(url)
 
+    if os.path.exists(media_dir):
+        for file_name in os.listdir(media_dir):
+            if file_name.lower().endswith(('jpg', 'jpeg', 'png', 'gif')):
+                images.append(f"{settings.MEDIA_URL}gallery/{file_name}")
+    
     context = {
         "images": images,
         "title": _("Media")

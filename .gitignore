@@ -43,3 +43,7 @@ yarn-error.log*
 .git/
 
 qr-code-generator.py
+
+# Criptography
+*.ppk
+*.pem
