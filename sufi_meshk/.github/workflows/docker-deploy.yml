@@ -1,4 +1,4 @@
-name: Publish Docker Image
+name: Deploy Docker Image
 
 on:
   push:
@@ -6,18 +6,36 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+    # 1. Kaynak kodu kontrol et
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    # 2. Docker için giriş yap
     - name: Log in to GitHub Container Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+    # 3. Docker imajını oluştur
     - name: Build Docker Image
       run: docker build -t ghcr.io/mukiraz/sufi-meshk-ensemble:latest .
 
+    # 4. Docker imajını GitHub Container Registry'ye gönder
     - name: Push Docker Image
       run: docker push ghcr.io/mukiraz/sufi-meshk-ensemble:latest
+
+    # 5. Uzak sunucuya SSH ile bağlan ve dağıtımı yap
+    - name: Deploy to Remote Server
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: 192.168.1.208
+        username: your_ssh_user
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          docker pull ghcr.io/mukiraz/sufi-meshk-ensemble:latest
+          docker stop sufi-meshk-container || true
+          docker rm sufi-meshk-container || true
+          docker run -d -p 8000:8000 --name sufi-meshk-container \
+            ghcr.io/mukiraz/sufi-meshk-ensemble:latest
