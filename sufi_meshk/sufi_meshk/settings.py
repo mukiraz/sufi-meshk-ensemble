@@ -31,6 +31,7 @@ SITE_URL = "https://sufimeshk.org"
 DEBUG =True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
+print(f"DEBUG: ALLOWED_HOSTS -> {ALLOWED_HOSTS}")
 
 #ALLOWED_HOSTS = ['127.0.0.1']
 
