@@ -1,6 +1,9 @@
 - name: Setup and Secure Ubuntu Server
   hosts: web
   become: yes
+  vars:
+    server_ip: "100.42.186.154"
+    domain_name: "sufimeshk.org"
   vars_files:
     - secrets.yml
 
@@ -29,6 +32,9 @@
           - docker.io
           - docker-compose
           - nginx
+          - certbot
+          - python3-certbot-nginx
+          - bind9
 
     - name: Enable and start Docker
       systemd:
@@ -45,14 +51,29 @@
     - name: Verify Doppler CLI installation
       command: doppler --version
 
+    - name: Configure DNS resolver
+      lineinfile:
+        path: /etc/resolv.conf
+        regexp: "^nameserver"
+        line: "nameserver 8.8.8.8"
+        state: present
+
+    - name: Add domain name to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: "^{{ server_ip }}"
+        line: "{{ server_ip }} {{ domain_name }} www.{{ domain_name }}"
+        state: present
+
     - name: Configure UFW
       ufw:
         rule: allow
         port: "{{ item }}"
       with_items:
-        - 22
-        - 80
-        - 443
+        - 22   # SSH
+        - 80   # HTTP
+        - 443  # HTTPS
+        - 53   # DNS
 
     - name: Enable UFW
       shell: echo "y" | ufw enable
@@ -100,7 +121,7 @@
       service:
         name: fail2ban
         state: restarted
-    
+
     - name: Create SSH directory
       file:
         path: /root/.ssh
@@ -171,7 +192,7 @@
       shell: |
         docker run -d -p 8000:8000 --name sufi-meshk-container \
           -e DOPPLER_TOKEN={{ doppler_token }} \
-          -e ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,192.168.1.208 \
+          -e ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0 \
           sufi-meshk-app
 
     - name: Configure Nginx for Django
@@ -180,7 +201,7 @@
         content: |
           server {
               listen 80;
-              server_name 192.168.1.216;
+              server_name {{ domain_name }} www.{{ domain_name }};
 
               location = /favicon.ico { access_log off; log_not_found off; }
               location /static/ {
@@ -209,14 +230,72 @@
         state: link
         force: yes
 
+    - name: Set ownership for static files
+      command: chown -R www-data:www-data /var/www/sufi-meshk/staticfiles
+      args:
+        warn: false
+
+    - name: Set ownership for media files
+      command: chown -R www-data:www-data /var/www/sufi-meshk/media
+      args:
+        warn: false
+
+    - name: Set permissions for static files
+      command: chmod -R 755 /var/www/sufi-meshk/staticfiles
+      args:
+        warn: false
+
+    - name: Set permissions for media files
+      command: chmod -R 755 /var/www/sufi-meshk/media
+      args:
+        warn: false
+
     - name: Remove default Nginx site
       file:
         path: /etc/nginx/sites-enabled/default
         state: absent
+
+    - name: Configure BIND DNS server
+      copy:
+        dest: /etc/bind/named.conf.local
+        content: |
+          zone "{{ domain_name }}" {
+              type master;
+              file "/etc/bind/db.{{ domain_name }}";
+          };
+        owner: root
+        group: bind
+        mode: '0644'
+
+    - name: Create DNS zone file
+      copy:
+        dest: /etc/bind/db.{{ domain_name }}
+        content: |
+          $TTL    604800
+          @       IN      SOA     ns1.{{ domain_name }}. admin.{{ domain_name }}. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+          ;
+          @       IN      NS      ns1.{{ domain_name }}.
+          @       IN      NS      ns2.{{ domain_name }}.
+          @       IN      A       {{ server_ip }}
+          www     IN      A       {{ server_ip }}
+          ns1     IN      A       {{ server_ip }}
+          ns2     IN      A       {{ server_ip }}
+        owner: root
+        group: bind
+        mode: '0644'
+
+    - name: Restart BIND service
+      service:
+        name: bind9
+        state: restarted
 
   handlers:
     - name: Restart Nginx
       service:
         name: nginx
         state: restarted
-      

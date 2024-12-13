@@ -25,5 +25,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files to the container
 COPY . /app/
 
+# Adjust ownership and permissions for static and media files
+RUN mkdir -p /app/staticfiles /app/media && \
+    chown -R www-data:www-data /app/staticfiles /app/media && \
+    chmod -R 755 /app/staticfiles /app/media
+
 # Inject environment variables using Doppler at runtime
 CMD ["doppler", "run", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
