@@ -1,0 +1,15 @@
+- name: Create a web user
+  user:
+    name: webuser
+    state: present
+    shell: /bin/bash
+    groups: www-data
+    append: yes
+
+- name: Ensure web user has sudo privileges
+  copy:
+    dest: /etc/sudoers.d/webuser
+    content: "webuser ALL=(ALL) NOPASSWD:ALL\n"
+    owner: root
+    group: root
+    mode: '0440'

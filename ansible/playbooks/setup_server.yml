@@ -1,0 +1,175 @@
+- name: Setup and Secure Ubuntu Server
+  hosts: web
+  become: yes
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Remove unnecessary packages
+      apt:
+        autoclean: yes
+        autoremove: yes
+
+    - name: Install essential packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - curl
+          - ufw
+          - fail2ban
+          - python3-pip
+          - git
+          - docker.io
+          - docker-compose
+
+    - name: Enable and start Docker
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Add user to Docker group
+      command: usermod -aG docker $USER
+
+    - name: Install Doppler CLI
+      shell: curl -Ls https://cli.doppler.com/install.sh | sh
+
+    - name: Verify Doppler CLI installation
+      command: doppler --version
+
+    - name: Configure UFW
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+      with_items:
+        - 22
+        - 80
+        - 443
+
+    - name: Enable UFW
+      shell: echo "y" | ufw enable
+      ignore_errors: yes
+
+    - name: Harden SSH configuration
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        create: yes
+      with_items:
+        - { regexp: '^PermitRootLogin', line: 'PermitRootLogin yes' }
+        - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication yes' }
+
+    - name: Restart SSH service
+      service:
+        name: ssh
+        state: restarted
+
+    - name: Check if log file exists for Fail2Ban
+      stat:
+        path: /var/log/auth.log
+      register: log_file
+
+    - name: Check alternative log file path
+      stat:
+        path: /var/log/secure
+      register: alt_log_file
+
+    - name: Fail task if no log file exists
+      fail:
+        msg: "Neither /var/log/auth.log nor /var/log/secure exists."
+      when: not log_file.stat.exists and not alt_log_file.stat.exists
+
+    - name: Configure Fail2Ban
+      copy:
+        src: ./files/jail.local
+        dest: /etc/fail2ban/jail.local
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart Fail2Ban service
+      service:
+        name: fail2ban
+        state: restarted
+    
+    - name: Create SSH directory
+      file:
+        path: /root/.ssh
+        state: directory
+        mode: '0700'
+        owner: root
+        group: root
+
+    - name: Add private SSH key for GitHub
+      copy:
+        content: "{{ github_ssh_key }}"
+        dest: /root/.ssh/id_ed25519_github
+        mode: '0600'
+        owner: root
+        group: root
+
+    - name: Add public SSH key for GitHub
+      copy:
+        content: "{{ github_ssh_key_pub }}"
+        dest: /root/.ssh/id_ed25519_github.pub
+        mode: '0644'
+        owner: root
+        group: root
+
+    - name: Add GitHub to known_hosts
+      shell: |
+        ssh-keyscan -t ed25519 github.com >> /root/.ssh/known_hosts
+      args:
+        creates: /root/.ssh/known_hosts
+
+    - name: Create SSH config file for GitHub
+      copy:
+        dest: /root/.ssh/config
+        content: |
+          Host github.com
+              HostName github.com
+              User git
+              IdentityFile /root/.ssh/id_ed25519_github
+        owner: root
+        group: root
+        mode: '0600'
+
+    - name: Test GitHub SSH connection
+      shell: ssh -o StrictHostKeyChecking=no -T git@github.com
+      register: ssh_test
+      failed_when: "\"You've successfully authenticated\" not in ssh_test.stderr"
+
+    - name: Display GitHub connection test result
+      debug:
+        msg: "{{ ssh_test.stderr }}"
+
+    - name: Clone GitHub repository
+      git:
+        repo: "git@github.com:mukiraz/sufi-meshk-ensemble.git"
+        dest: "/var/www/sufi-meshk"
+        version: main
+
+    - name: Build Docker container
+      shell: |
+        docker build -t sufi-meshk-app /var/www/sufi-meshk/sufi_meshk
+
+    - name: Stop and remove existing Docker container
+      shell: |
+        docker stop sufi-meshk-container || true
+        docker rm sufi-meshk-container || true
+
+    - name: Run Docker container with Doppler
+      shell: |
+        docker run -d -p 8000:8000 --name sufi-meshk-container \
+          -e DOPPLER_TOKEN={{ doppler_token }} \
+          -e ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,192.168.1.208 \
+          sufi-meshk-app
+      
