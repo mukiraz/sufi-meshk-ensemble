@@ -1,0 +1,108 @@
+- name: Obtain SSL Certificate with Let's Encrypt
+  hosts: web
+  become: yes
+  vars:
+    domain_name: "sufimeshk.org"
+    email: "admin@sufimeshk.org"
+
+  tasks:
+    - name: Install Certbot and Nginx plugin
+      apt:
+        name: 
+          - certbot
+          - python3-certbot-nginx
+        state: present
+        update_cache: yes
+
+    - name: Configure Nginx temporary for SSL validation
+      copy:
+        dest: /etc/nginx/sites-available/{{ domain_name }}
+        content: |
+          server {
+              listen 80;
+              server_name {{ domain_name }} www.{{ domain_name }};
+
+              location /.well-known/acme-challenge/ {
+                  root /var/www/html;
+              }
+
+              location / {
+                  return 404;
+              }
+          }
+      notify:
+        - Restart Nginx
+
+    - name: Link Nginx site configuration
+      file:
+        src: /etc/nginx/sites-available/{{ domain_name }}
+        dest: /etc/nginx/sites-enabled/{{ domain_name }}
+        state: link
+        force: yes
+
+    - name: Ensure webroot directory exists
+      file:
+        path: /var/www/html/.well-known/acme-challenge/
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+
+    - name: Obtain SSL certificate with Certbot
+      command: >
+        certbot certonly --webroot
+        -w /var/www/html
+        -d {{ domain_name }}
+        -d www.{{ domain_name }}
+        --email {{ email }}
+        --non-interactive
+        --agree-tos
+
+    - name: Configure Nginx for HTTPS
+      copy:
+        dest: /etc/nginx/sites-available/{{ domain_name }}
+        content: |
+          server {
+              listen 80;
+              server_name {{ domain_name }} www.{{ domain_name }};
+              return 301 https://$host$request_uri;
+          }
+
+          server {
+              listen 443 ssl;
+              server_name {{ domain_name }} www.{{ domain_name }};
+
+              ssl_certificate /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem;
+              ssl_certificate_key /etc/letsencrypt/live/{{ domain_name }}/privkey.pem;
+              include /etc/letsencrypt/options-ssl-nginx.conf;
+              ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+              location /static/ {
+                  root /var/www/sufi-meshk;
+              }
+
+              location /media/ {
+                  root /var/www/sufi-meshk;
+              }
+
+              location / {
+                  proxy_pass http://127.0.0.1:8000;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+              }
+          }
+      notify:
+        - Restart Nginx
+
+    - name: Remove default Nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

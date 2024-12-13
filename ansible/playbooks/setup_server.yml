@@ -194,6 +194,16 @@
           -e DOPPLER_TOKEN={{ doppler_token }} \
           -e ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0 \
           sufi-meshk-app
+    
+    - name: Collect static files in Docker container
+      shell: docker exec sufi-meshk-container python manage.py collectstatic --noinput
+      register: collectstatic_result
+      failed_when: collectstatic_result.rc != 0
+      ignore_errors: yes
+
+    - name: Display collectstatic result
+      debug:
+        var: collectstatic_result.stderr
 
     - name: Configure Nginx for Django
       copy:
@@ -230,30 +240,31 @@
         state: link
         force: yes
 
-    - name: Set ownership for static files
-      command: chown -R www-data:www-data /var/www/sufi-meshk/staticfiles
-      args:
-        warn: false
-
-    - name: Set ownership for media files
-      command: chown -R www-data:www-data /var/www/sufi-meshk/media
-      args:
-        warn: false
-
-    - name: Set permissions for static files
-      command: chmod -R 755 /var/www/sufi-meshk/staticfiles
-      args:
-        warn: false
-
-    - name: Set permissions for media files
-      command: chmod -R 755 /var/www/sufi-meshk/media
-      args:
-        warn: false
-
     - name: Remove default Nginx site
       file:
         path: /etc/nginx/sites-enabled/default
         state: absent
+
+    - name: Configure BIND options for recursive queries
+      blockinfile:
+        path: /etc/bind/named.conf.options
+        block: |
+          options {
+              directory "/var/cache/bind";
+
+              recursion yes;  # Recursive sorgulara izin ver
+              allow-recursion { any; };  # Recursive sorgulara hangi IP'lerin erişebileceğini belirle
+              listen-on { any; };  # Hangi IP'lerin DNS sunucusunu kullanabileceğini belirtir
+              allow-query { any; };  # DNS sorgularına kimlerin erişebileceğini tanımlar
+
+              dnssec-enable yes;
+              dnssec-validation yes;
+          };
+
+    - name: Restart BIND service
+      service:
+        name: bind9
+        state: restarted
 
     - name: Configure BIND DNS server
       copy:
