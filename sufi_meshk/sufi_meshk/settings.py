@@ -27,8 +27,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 SITE_URL = "https://sufimeshk.org"
 
-#DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
-DEBUG =True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
 print(f"DEBUG: ALLOWED_HOSTS -> {ALLOWED_HOSTS}")

@@ -28,6 +28,7 @@
           - git
           - docker.io
           - docker-compose
+          - nginx
 
     - name: Enable and start Docker
       systemd:
@@ -172,4 +173,50 @@
           -e DOPPLER_TOKEN={{ doppler_token }} \
           -e ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,192.168.1.208 \
           sufi-meshk-app
+
+    - name: Configure Nginx for Django
+      copy:
+        dest: /etc/nginx/sites-available/sufi-meshk
+        content: |
+          server {
+              listen 80;
+              server_name 192.168.1.216;
+
+              location = /favicon.ico { access_log off; log_not_found off; }
+              location /static/ {
+                  root /var/www/sufi-meshk;
+              }
+
+              location /media/ {
+                  root /var/www/sufi-meshk;
+              }
+
+              location / {
+                  proxy_pass http://127.0.0.1:8000;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+              }
+          }
+      notify:
+        - Restart Nginx
+
+    - name: Enable Nginx site
+      file:
+        src: /etc/nginx/sites-available/sufi-meshk
+        dest: /etc/nginx/sites-enabled/sufi-meshk
+        state: link
+        force: yes
+
+    - name: Remove default Nginx site
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
       
