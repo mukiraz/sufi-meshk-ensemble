@@ -149,7 +149,7 @@ STATIC_ROOT ='/var/www/sufi-meshk/sufi_meshk/static/'
 
 MEDIA_URL = '/media/'
 #MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_ROOT = '/var/www/sufi-meshk/sufi_meshk/media'
+MEDIA_ROOT = '/app/media'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
