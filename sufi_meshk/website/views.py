@@ -54,17 +54,11 @@ def group_member_detail(request, slug):
 def gallery_view(request):
     # MEDIA_ROOT'u pathlib.Path'e dönüştürerek kullanın
     media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
-    print(media_dir, settings.MEDIA_URL)
     images = []
 
-    if media_dir.exists():
-        for file_name in media_dir.iterdir():
-            if file_name.is_file() and file_name.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif'):
-                image_path = os.path.join(settings.MEDIA_URL, 'gallery', file_name.name)
-                images.append(image_path.replace('\\', '/'))  # Windows yolu önlemek için düzeltme
-
-    
-    print(images)
+    if media_dir.exists():  # pathlib ile os.path.exists yerine .exists() kullanılır
+        for file_name in media_dir.iterdir():  # Dosya isimlerini listele
+            print(file_name)
     
     context = {
         "images": images,
