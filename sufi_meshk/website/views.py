@@ -52,14 +52,15 @@ def group_member_detail(request, slug):
     return render(request, 'group-member.html', context)
 
 def gallery_view(request):
-    media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
+    media_dir = Path(settings.MEDIA_ROOT) / 'gallery'
     print(f"Media directory path: {media_dir}")
     images = []
 
-    if media_dir.exists():  # Var olup olmadığını kontrol et
-        print("Directory exists. Listing files:")
+    if media_dir.exists():
+        print(f"Directory exists: {media_dir}")
         for file_name in media_dir.iterdir():
-            print(f"File: {file_name} - Is File: {file_name.is_file()}")  # Dosyaların detaylı debug çıktısı
+            print(f"File: {file_name}, Is File: {file_name.is_file()}, Suffix: {file_name.suffix.lower()}")
+            # Dosya kontrolü sırasında hata olup olmadığını tespit edin
             if file_name.is_file() and file_name.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif'):
                 images.append(f"{settings.MEDIA_URL}gallery/{file_name.name}")
     
@@ -70,6 +71,7 @@ def gallery_view(request):
         "title": _("Media")
     }
     return render(request, 'media.html', context)
+
 
 def updates_view(request):
     updates = Update.objects.filter(is_active=True)
