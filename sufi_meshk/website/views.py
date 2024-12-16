@@ -1,4 +1,5 @@
-import os, uuid, Path
+import os, uuid
+from pathlib import Path
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
