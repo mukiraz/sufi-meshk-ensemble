@@ -56,6 +56,8 @@ def gallery_view(request):
     media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
     images = []
 
+    print("madia_dir: ", media_dir)
+
     if media_dir.exists():  # pathlib ile os.path.exists yerine .exists() kullanılır
         for file_name in media_dir.iterdir():  # Dosya isimlerini listele
             print(file_name)
