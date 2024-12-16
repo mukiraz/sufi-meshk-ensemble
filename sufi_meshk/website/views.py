@@ -54,6 +54,7 @@ def group_member_detail(request, slug):
 def gallery_view(request):
     # MEDIA_ROOT'u pathlib.Path'e dönüştürerek kullanın
     media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
+    print(media_dir)
     images = []
 
     if media_dir.exists():  # pathlib ile os.path.exists yerine .exists() kullanılır
