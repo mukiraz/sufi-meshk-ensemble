@@ -61,6 +61,8 @@ def gallery_view(request):
             if file_name.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif'):
                 images.append(f"{settings.MEDIA_URL}gallery/{file_name.name}")
     
+    print(images)
+    
     context = {
         "images": images,
         "title": _("Media")
