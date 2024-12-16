@@ -55,21 +55,16 @@ import os
 
 def gallery_view(request):
     media_dir = os.path.join(settings.MEDIA_ROOT, 'gallery')
-    print(f"Media directory path: {media_dir}")
     images = []
 
     if os.path.exists(media_dir):
-        print(f"Directory exists: {media_dir}")
         try:
             for file_name in os.listdir(media_dir):
-                print(f"File: {file_name}")
                 full_path = os.path.join(media_dir, file_name)
                 if os.path.isfile(full_path) and file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')):
                     images.append(f"{settings.MEDIA_URL}gallery/{file_name}")
         except Exception as e:
             print(f"Error during iteration: {e}")
-    
-    print(f"Images found: {images}")
     
     context = {
         "images": images,
