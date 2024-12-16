@@ -70,6 +70,7 @@ def gallery_view(request):
         "images": images,
         "title": _("Media")
     }
+    print(images)
     return render(request, 'media.html', context)
 
 
