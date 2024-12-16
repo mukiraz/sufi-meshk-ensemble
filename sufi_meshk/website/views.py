@@ -1,4 +1,4 @@
-import os, uuid
+import os, uuid, Path
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -51,13 +51,14 @@ def group_member_detail(request, slug):
     return render(request, 'group-member.html', context)
 
 def gallery_view(request):
-    media_dir = settings.MEDIA_ROOT / 'gallery'  # Yerel medya dosyalarının yolu
+    # MEDIA_ROOT'u pathlib.Path'e dönüştürerek kullanın
+    media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
     images = []
 
-    if os.path.exists(media_dir):
-        for file_name in os.listdir(media_dir):
-            if file_name.lower().endswith(('jpg', 'jpeg', 'png', 'gif')):
-                images.append(f"{settings.MEDIA_URL}gallery/{file_name}")
+    if media_dir.exists():  # pathlib ile os.path.exists yerine .exists() kullanılır
+        for file_name in media_dir.iterdir():  # Dosya isimlerini listele
+            if file_name.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif'):
+                images.append(f"{settings.MEDIA_URL}gallery/{file_name.name}")
     
     context = {
         "images": images,

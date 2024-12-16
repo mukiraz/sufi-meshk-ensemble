@@ -3,7 +3,7 @@
   become: yes
   vars:
     domain_name: "sufimeshk.org"
-    email: "admin@sufimeshk.org"
+    email: "mukiraz@gmail.com"
 
   tasks:
     - name: Install Certbot and Nginx plugin
@@ -24,6 +24,7 @@
 
               location /.well-known/acme-challenge/ {
                   root /var/www/html;
+                  allow all;
               }
 
               location / {
@@ -48,6 +49,34 @@
         group: www-data
         mode: '0755'
 
+    - name: Debug webroot content
+      shell: |
+        ls -l /var/www/html/.well-known/acme-challenge/
+        cat /var/www/html/.well-known/acme-challenge/test.txt
+      register: debug_result
+
+    - name: Display debug content
+      debug:
+        var: debug_result.stdout_lines
+
+    - name: Test webroot directory accessibility
+      shell: |
+        echo "test" > /var/www/html/.well-known/acme-challenge/test.txt
+      register: test_file_result
+
+    - name: Check test file availability
+      uri:
+        url: "http://{{ domain_name }}/.well-known/acme-challenge/test.txt"
+        return_content: yes
+      register: test_accessibility
+      retries: 3
+      delay: 10
+      until: test_accessibility.status == 200
+
+    - name: Display test file result
+      debug:
+        msg: "{{ test_accessibility }}"
+
     - name: Obtain SSL certificate with Certbot
       command: >
         certbot certonly --webroot
@@ -57,6 +86,30 @@
         --email {{ email }}
         --non-interactive
         --agree-tos
+      register: certbot_result
+      retries: 3
+      delay: 10
+      failed_when: "'The Certificate Authority reported these problems' in certbot_result.stderr"
+
+    - name: Display Certbot result
+      debug:
+        var: certbot_result
+
+    - name: Verify and download Let's Encrypt SSL options
+      shell: |
+        if [ ! -f /etc/letsencrypt/options-ssl-nginx.conf ]; then
+          curl -o /etc/letsencrypt/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/main/certbot/certbot/options-ssl-nginx.conf
+        fi
+      args:
+        warn: false
+
+    - name: Generate DH params if not exist
+      shell: |
+        if [ ! -f /etc/letsencrypt/ssl-dhparams.pem ]; then
+          openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
+        fi
+      args:
+        warn: false
 
     - name: Configure Nginx for HTTPS
       copy:
@@ -95,6 +148,17 @@
           }
       notify:
         - Restart Nginx
+
+    - name: Test Nginx configuration
+      command: nginx -t
+      register: nginx_test
+      failed_when: nginx_test.rc != 0
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+      when: nginx_test.rc == 0
 
     - name: Remove default Nginx site
       file:

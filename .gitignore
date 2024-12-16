@@ -53,3 +53,6 @@ qr-code-generator.py
 ansible/inventories/*_keys
 ansible/ansible.cfg
 
+# Webhook
+webhook.py
+
