@@ -52,15 +52,18 @@ def group_member_detail(request, slug):
     return render(request, 'group-member.html', context)
 
 def gallery_view(request):
-    # MEDIA_ROOT'u pathlib.Path'e dönüştürerek kullanın
     media_dir = Path(settings.MEDIA_ROOT) / 'gallery'  # Yerel medya dosyalarının yolu
+    print(f"Media directory path: {media_dir}")
     images = []
 
-    print("madia_dir: ", media_dir)
-
-    if media_dir.exists():  # pathlib ile os.path.exists yerine .exists() kullanılır
-        for file_name in media_dir.iterdir():  # Dosya isimlerini listele
-            print(file_name)
+    if media_dir.exists():  # Var olup olmadığını kontrol et
+        print("Directory exists. Listing files:")
+        for file_name in media_dir.iterdir():
+            print(f"File: {file_name} - Is File: {file_name.is_file()}")  # Dosyaların detaylı debug çıktısı
+            if file_name.is_file() and file_name.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif'):
+                images.append(f"{settings.MEDIA_URL}gallery/{file_name.name}")
+    
+    print(f"Images found: {images}")
     
     context = {
         "images": images,
