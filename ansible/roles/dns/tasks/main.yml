@@ -1,0 +1,13 @@
+- name: Configure DNS resolver
+  lineinfile:
+    path: /etc/resolv.conf
+    regexp: "^nameserver"
+    line: "nameserver 8.8.8.8"
+    state: present
+
+- name: Add domain name to /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: "^{{ server_ip }}"
+    line: "{{ server_ip }} {{ domain_name }} www.{{ domain_name }}"
+    state: present

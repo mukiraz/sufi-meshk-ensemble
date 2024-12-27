@@ -1,0 +1,6 @@
+- name: Test Ansible Connectivity
+  hosts: web
+  become: no
+  tasks:
+    - name: Ping the target
+      ping:

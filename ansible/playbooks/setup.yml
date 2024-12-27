@@ -1,0 +1,13 @@
+- name: Setup server
+  hosts: web
+  become: yes
+
+  roles:
+    - common
+    - docker
+    - doppler
+    - { role: dns, when: "'production' in group_names" }
+    - ufw
+    - ssh
+    - fail2ban
+    - github_ssh

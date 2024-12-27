@@ -1,0 +1,50 @@
+- name: Create SSH directory
+  file:
+    path: /root/.ssh
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+
+- name: Add private SSH key for GitHub
+  copy:
+    content: "{{ github_ssh_key }}"
+    dest: /root/.ssh/id_ed25519_github
+    mode: '0600'
+    owner: root
+    group: root
+
+- name: Add public SSH key for GitHub
+  copy:
+    content: "{{ github_ssh_key_pub }}"
+    dest: /root/.ssh/id_ed25519_github.pub
+    mode: '0644'
+    owner: root
+    group: root
+
+- name: Add GitHub to known_hosts
+  shell: |
+    ssh-keyscan -t ed25519 github.com >> /root/.ssh/known_hosts
+  args:
+    creates: /root/.ssh/known_hosts
+
+- name: Create SSH config file for GitHub
+  copy:
+    dest: /root/.ssh/config
+    content: |
+      Host github.com
+          HostName github.com
+          User git
+          IdentityFile /root/.ssh/id_ed25519_github
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Test GitHub SSH connection
+  shell: ssh -o StrictHostKeyChecking=no -T git@github.com
+  register: ssh_test
+  failed_when: "\"You've successfully authenticated\" not in ssh_test.stderr"
+
+- name: Display GitHub connection test result
+  debug:
+    msg: "{{ ssh_test.stderr }}"

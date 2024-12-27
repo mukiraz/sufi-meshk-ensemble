@@ -1,0 +1,7 @@
+- name: Configure Nginx
+  hosts: web
+  become: yes
+  vars:
+    env: development
+  roles:
+    - nginx

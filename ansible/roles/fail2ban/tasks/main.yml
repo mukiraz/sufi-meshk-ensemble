@@ -1,0 +1,27 @@
+- name: Check if log file exists for Fail2Ban
+  stat:
+    path: /var/log/auth.log
+  register: log_file
+
+- name: Check alternative log file path
+  stat:
+    path: /var/log/secure
+  register: alt_log_file
+
+- name: Fail task if no log file exists
+  fail:
+    msg: "Neither /var/log/auth.log nor /var/log/secure exists."
+  when: not log_file.stat.exists and not alt_log_file.stat.exists
+
+- name: Configure Fail2Ban
+  copy:
+    src: jail.local
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart Fail2Ban service
+  service:
+    name: fail2ban
+    state: restarted

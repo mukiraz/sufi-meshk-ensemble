@@ -1,0 +1,5 @@
+- name: Install Doppler CLI
+  shell: curl -Ls https://cli.doppler.com/install.sh | sh
+
+- name: Verify Doppler CLI installation
+  command: doppler --version

@@ -1,0 +1,76 @@
+- name: Ensure UFW is installed
+  apt:
+    name: ufw
+    state: present
+    update_cache: yes
+
+- name: Set default UFW policies for incoming traffic
+  command: ufw default deny incoming
+  register: incoming_policy
+  changed_when: "'Default incoming policy set to DENY' in incoming_policy.stdout"
+
+- name: Set default UFW policies for outgoing traffic
+  command: ufw default allow outgoing
+  register: outgoing_policy
+  changed_when: "'Default outgoing policy set to ALLOW' in outgoing_policy.stdout"
+
+
+- name: Add UFW rules for common ports
+  ufw:
+    rule: allow
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { port: 22, proto: "tcp" }   # SSH
+    - { port: 80, proto: "tcp" }   # HTTP
+    - { port: 443, proto: "tcp" }  # HTTPS
+    - { port: 53, proto: "tcp" }   # DNS (TCP)
+    - { port: 53, proto: "udp" }   # DNS (UDP)
+    - { port: 5000, proto: "tcp" } # Eklenen port
+
+- name: Add UFW rules for specific IP ranges (HTTP)
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+    from_ip: "{{ item }}"
+  with_items:
+    - "192.30.252.0/22"
+    - "185.199.108.0/22"
+    - "140.82.112.0/20"
+    - "143.55.64.0/20"
+
+- name: Add UFW rules for specific IP ranges (HTTPS)
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+    from_ip: "{{ item }}"
+  with_items:
+    - "192.30.252.0/22"
+    - "185.199.108.0/22"
+    - "140.82.112.0/20"
+    - "143.55.64.0/20"
+
+- name: Add UFW rules for IPv6 (HTTP)
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+    from_ip: "{{ item }}"
+  with_items:
+    - "2a0a:a440::/29"
+    - "2606:50c0::/32"
+
+- name: Add UFW rules for IPv6 (HTTPS)
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+    from_ip: "{{ item }}"
+  with_items:
+    - "2a0a:a440::/29"
+    - "2606:50c0::/32"
+
+- name: Reload UFW to apply changes
+  command: ufw reload

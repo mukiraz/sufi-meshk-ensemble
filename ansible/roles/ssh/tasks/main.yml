@@ -1,0 +1,14 @@
+- name: Harden SSH configuration
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    create: yes
+  with_items:
+    - { regexp: '^PermitRootLogin', line: 'PermitRootLogin yes' }
+    - { regexp: '^PasswordAuthentication', line: 'PasswordAuthentication yes' }
+
+- name: Restart SSH service
+  service:
+    name: ssh
+    state: restarted

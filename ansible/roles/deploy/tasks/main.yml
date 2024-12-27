@@ -1,0 +1,25 @@
+- name: Clone GitHub repository
+  git:
+    repo: "git@github.com:mukiraz/sufi-meshk-ensemble.git"
+    dest: "/var/www/sufi-meshk"
+    version: main
+
+- name: Build Docker container
+  shell: |
+    docker build -t sufi-meshk-app /var/www/sufi-meshk/sufi_meshk
+
+- name: Stop and remove existing Docker container
+  shell: |
+    docker stop sufi-meshk-container || true
+    docker rm sufi-meshk-container || true
+
+- name: Run Docker container with Doppler and static/media volumes
+  shell: |
+    docker run -d -p 8000:8000 --name sufi-meshk-container \
+      -e DOPPLER_TOKEN={{ doppler_token }} \
+      -v /var/www/sufi-meshk/sufi_meshk/static:/app/static \
+      -v /var/www/sufi-meshk/sufi_meshk/media:/app/media \
+      sufi-meshk-app
+  notify:
+    - Restart Docker container
+

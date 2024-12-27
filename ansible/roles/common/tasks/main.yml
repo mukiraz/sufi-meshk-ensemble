@@ -1,0 +1,27 @@
+- name: Update and upgrade apt packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Remove unnecessary packages
+  apt:
+    autoclean: yes
+    autoremove: yes
+
+- name: Install essential packages
+  apt:
+    name:
+      - curl
+      - ufw
+      - fail2ban
+      - python3-pip
+      - git
+      - docker.io
+      - docker-compose
+      - nginx
+      - certbot
+      - python3-certbot-nginx
+      - bind9
+    state: present
+
+

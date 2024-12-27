@@ -1,0 +1,54 @@
+- name: Configure Nginx for Development
+  template:
+    src: nginx_development.j2
+    dest: /etc/nginx/sites-available/sufi-meshk
+  when: env == "development"
+
+- name: Configure Nginx for Production HTTP
+  template:
+    src: nginx_production_http.j2
+    dest: /etc/nginx/sites-available/sufi-meshk-http
+  when: environment == "production"
+
+- name: Configure Nginx for Production HTTPS
+  template:
+    src: nginx_production_https.j2
+    dest: /etc/nginx/sites-available/sufi-meshk-https
+  when: environment == "production"
+
+- name: Enable Nginx site for Development
+  file:
+    src: /etc/nginx/sites-available/sufi-meshk
+    dest: /etc/nginx/sites-enabled/sufi-meshk
+    state: link
+    force: yes
+  when: env == "development"
+
+- name: Enable Nginx sites for Production
+  file:
+    src: /etc/nginx/sites-available/sufi-meshk-http
+    dest: /etc/nginx/sites-enabled/sufi-meshk-http
+    state: link
+    force: yes
+  when: environment == "production"
+
+- name: Enable Nginx HTTPS for Production
+  file:
+    src: /etc/nginx/sites-available/sufi-meshk-https
+    dest: /etc/nginx/sites-enabled/sufi-meshk-https
+    state: link
+    force: yes
+  when: environment == "production"
+
+- name: Remove default Nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Test Nginx configuration
+  shell: nginx -t
+
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted
